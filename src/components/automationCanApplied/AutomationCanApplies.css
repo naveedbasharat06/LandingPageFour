@@ -1,0 +1,11 @@
+.automationPercentile_can_applied {
+  background-color: #272364;
+  background-image: url("https://elixirautomation.com/wp-content/uploads/2025/01/border-new-01-1.svg");
+  background-repeat: no-repeat;
+  height: 747px;
+}
+@media (max-width: 1024px) {
+  .automationPercentile_can_applied {
+    height: auto;
+  }
+}

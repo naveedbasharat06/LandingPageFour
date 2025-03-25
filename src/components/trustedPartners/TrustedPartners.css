@@ -1,0 +1,25 @@
+/* TrustedPartners.css */
+.trusted_partner_main {
+  background-image: url("https://elixirautomation.com/wp-content/uploads/2025/01/Tech-Overlay-Tilt-01-1.svg");
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 400px;
+  background-size: 100% auto;
+  opacity: 0.9;
+  transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
+  overflow: hidden;
+}
+.trusted_partner_logo {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+/* Smooth hover transitions */
+.motion-div {
+  transition: transform 0.3s ease;
+}
+
+/* Responsive dots */
+.slider-dot {
+  transition: all 0.3s ease;
+}
