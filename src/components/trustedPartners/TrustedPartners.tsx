@@ -56,7 +56,7 @@ const TrustedPartners = () => {
 
   const prevSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev === 0 ? totalSlides - 1 : prev - 1));
-  }, []);
+  }, [totalSlides]);
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index);

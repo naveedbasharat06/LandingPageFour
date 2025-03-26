@@ -5,9 +5,9 @@
   background-repeat: no-repeat;
   width: 100%;
   min-height: 400px;
-  background-size: 100% auto;
+  background-size: 100%;
   opacity: 0.9;
-  transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
+  /* transition: background 0.3s, border-radius 0.3s, opacity 0.3s; */
   overflow: hidden;
 }
 .trusted_partner_logo {

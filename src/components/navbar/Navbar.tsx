@@ -60,7 +60,7 @@ const Navbar = () => {
                 key={link.name}
                 href={link.href}
                 onClick={() => setActiveLink(link.name)}
-                className={` z-10 font-bold
+                className={`z-10 font-bold
                  py-0 px-5 text-lg  md:justify-start transition-colors ${
                    activeLink === link.name
                      ? "text-[#B34B98] font-bold"

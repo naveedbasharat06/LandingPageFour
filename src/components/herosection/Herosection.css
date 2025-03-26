@@ -1,7 +1,7 @@
 .Hero_section_main {
   background: url("../../images/heroBg01.jpg") no-repeat center center;
   background-size: cover; /* Ensure full coverage */
-  width: 100vw; /* Full viewport width */
+  width: 100%; /* Full viewport width */
   height: 930px; /* Full viewport height */
   margin: 0; /* Remove margins */
   padding: 0; /* Remove padding */

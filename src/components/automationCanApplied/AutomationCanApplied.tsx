@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import "./AutomationCanApplies.css";
 
 const automationApplied_card_data = [
@@ -64,46 +65,120 @@ const automationApplied_card_data = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { y: 30, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 10,
+      duration: 0.5,
+    },
+  },
+};
+
 const AutomationCanApplied: React.FC = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: false, amount: 0.1 }); // Reduced threshold for mobile
+
   return (
-    <div className="automationPercentile_can_applied relative py-20 bg-[#051330] ">
-      <div className="max-w-[1350px] mx-auto px-4">
+    <div
+      ref={ref}
+      className="automationPercentile_can_applied relative py-12 md:py-20 bg-[#272364] overflow-hidden"
+    >
+      <img
+        className="absolute top-0"
+        src="https://elixirautomation.com/wp-content/uploads/2025/01/border-new-01-1.svg"
+        alt=""
+      />
+      <div className="max-w-[1350px] mx-auto px-4 sm:px-6">
+        {" "}
+        {/* Added sm:px-6 */}
         {/* Title Section */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
-          <h1 className="text-[32px] md:text-[45px] font-extrabold text-white max-w-[622px] leading-[1.2] mb-4 md:mb-0">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 md:mb-12 px-2 sm:px-0" // Added padding for mobile
+        >
+          <h1 className="text-2xl sm:text-3xl md:text-[45px] font-extrabold text-white max-w-full md:max-w-[622px] leading-tight md:leading-[1.2] mb-4 md:mb-0">
             1% of where automation can be applied
           </h1>
-          <button className="text-[#B34B98] hover:text-purple-400 text-xl md:text-2xl font-bold transition-colors duration-300">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="text-[#B34B98] hover:text-purple-400 text-lg sm:text-xl md:text-2xl font-bold transition-colors duration-300 mt-4 md:mt-0"
+          >
             GET FREE AUDIT →
-          </button>
-        </div>
-
-        {/* Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+          </motion.button>
+        </motion.div>
+        {/* Cards Grid - Adjusted gap and padding for mobile */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6 px-2 sm:px-0" // Added mobile padding
+        >
           {automationApplied_card_data.map((item) => (
-            <div
+            <motion.div
               key={item.Id}
-              className="bg-white  rounded-2xl p-6  transition-all duration-300 flex flex-col items-center text-center border-b-4 border-indigo-300 z-20"
+              variants={itemVariants}
+              whileHover={{
+                y: window.innerWidth > 768 ? -10 : 0, // Disable lift on mobile
+                boxShadow:
+                  window.innerWidth > 768
+                    ? "0 10px 25px -5px rgba(179, 75, 152, 0.3)"
+                    : "none",
+              }}
+              className="relative bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 transition-all duration-300 flex flex-col items-center text-center border-b-4 border-indigo-300 z-20 hover:z-30 group overflow-hidden"
             >
-              <img
-                src={item.icon}
-                alt={item.title}
-                className="w-16 h-16 mb-4 object-contain text-white"
+              {/* Gradient overlay - hidden on mobile */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileHover={{ opacity: window.innerWidth > 768 ? 1 : 0 }}
+                className="absolute inset-0 bg-gradient-to-br from-[#B34B98]/20 to-[#272364]/20 transition-opacity duration-300"
               />
-              <h2 className="text-[#272364] text-xl font-extrabold leading-1 px-2">
+
+              {/* Icon */}
+              <div className="w-12 h-12 sm:w-16 sm:h-16 mb-3 sm:mb-4">
+                <img
+                  src={item.icon}
+                  alt={item.title}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+
+              {/* Text with adjusted size for mobile */}
+              <h2 className="text-[#272364] text-base sm:text-lg md:text-xl font-extrabold leading-tight sm:leading-normal px-1 sm:px-2">
                 {item.title}
               </h2>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
-      {/* <div className="z-10"> */}
-      <img
-        className="absolute bottom-0 left-0 max-w-[414px]"
+
+      {/* Background image - hidden on small screens */}
+      <motion.img
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: window.innerWidth > 768 ? 0.2 : 0 } : {}}
+        transition={{ delay: 0.5, duration: 1 }}
+        className="absolute bottom-0 left-0 max-w-[414px] hidden sm:block"
         src="https://elixirautomation.com/wp-content/uploads/2025/01/Vector-Smart-Object.png"
-        alt="backgroung img"
+        alt="background"
       />
-      {/* </div> */}
     </div>
   );
 };

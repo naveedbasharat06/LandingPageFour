@@ -1,4 +1,4 @@
-import "./output.css";
+// import "./output.css";
 import "./App.css";
 import MyComponent from "./MyComponents";
 

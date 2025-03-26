@@ -1,11 +1,32 @@
 .automationPercentile_can_applied {
   background-color: #272364;
-  background-image: url("https://elixirautomation.com/wp-content/uploads/2025/01/border-new-01-1.svg");
+  /* background-image: url("https://elixirautomation.com/wp-content/uploads/2025/01/border-new-01-1.svg"); */
   background-repeat: no-repeat;
-  height: 747px;
+  background-position: bottom right;
+  background-size: auto;
+  min-height: auto; /* Changed from fixed height */
+  padding-bottom: 2rem; /* Added bottom padding */
+  position: relative;
 }
-@media (max-width: 1024px) {
+
+/* Mobile-first styles */
+@media (max-width: 640px) {
   .automationPercentile_can_applied {
-    height: auto;
+    background-image: none; /* Remove bg image on small screens */
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .automationPercentile_can_applied {
+    min-height: 747px;
+  }
+}
+
+/* Card adjustments for mobile */
+@media (max-width: 640px) {
+  .motion-div {
+    margin-bottom: 0.5rem;
   }
 }

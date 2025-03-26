@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 
 const HeroSection = React.lazy(
   () => import("./components/herosection/HeroSection")
