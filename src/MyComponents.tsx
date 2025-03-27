@@ -12,6 +12,9 @@ const AutomationCanApplied = React.lazy(
 const ToolsWeLove = React.lazy(
   () => import("./components/toolsWeLove/ToolsWeLove")
 );
+const MeetOurExpertTeam = React.lazy(
+  () => import("./components/ourExpertTeam/OurTeam")
+);
 
 const MyComponent: React.FC = () => {
   return (
@@ -20,6 +23,8 @@ const MyComponent: React.FC = () => {
       <TrustedPartners />
       <AutomationCanApplied />
       <ToolsWeLove />
+
+      <MeetOurExpertTeam />
     </div>
   );
 };

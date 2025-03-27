@@ -91,11 +91,12 @@ const TrustedPartners = () => {
       onMouseEnter={() => setAutoSlide(false)}
       onMouseLeave={() => setAutoSlide(true)}
     >
+      {/* <div className="trusted_partner_bg_overlay"></div> */}
       <div className="max-w-[1350px] mx-auto px-4 w-full">
         <p className="text-[17px] font-semibold text-[#B34B98] text-center font-[Figtree]">
           Elixir Automation
         </p>
-        <h2 className="text-[45px] font-extrabold text-[#272364] text-center mb-8 leading-1">
+        <h2 className="text-[45px] font-extrabold text-[#272364] text-center mb-6 leading-1">
           Trusted Partners
         </h2>
 
@@ -118,7 +119,7 @@ const TrustedPartners = () => {
                 <motion.div
                   key={partner.id}
                   whileHover={{ scale: 1.05 }}
-                  className="flex flex-col items-center justify-center h-[180px] bg-white bg-opacity-10 rounded-xl p-6"
+                  className="flex flex-col items-center justify-center h-[180px] bg-white bg-opacity-10 rounded-xl p-5"
                 >
                   <div className="w-full flex items-center justify-center h-[150px]">
                     <img
@@ -179,8 +180,8 @@ const TrustedPartners = () => {
               className={`w-2 h-2 rounded-full transition-all duration-300 ${
                 currentSlide === Math.floor(index + 1)
                   ? // index+1 (index / visiblePartners)
-                    "bg-black w-6"
-                  : "bg-gray-500 bg-opacity-30"
+                    "bg-black w-2"
+                  : "bg-black bg-opacity-30"
               }`}
               aria-label={`Go to partner ${index + 1}`}
             />

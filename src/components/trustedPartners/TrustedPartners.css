@@ -3,10 +3,11 @@
   background-position: bottom right;
   background-repeat: no-repeat;
   width: 100%;
-  min-height: 400px;
+  min-height: 404px;
   background-size: 100% auto;
   opacity: 0.9;
   overflow: hidden;
+  border-radius: 60px 0px 0px 0px;
 }
 
 .trusted_partner_logo {

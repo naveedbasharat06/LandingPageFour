@@ -20,12 +20,12 @@ const automationApplied_card_data = [
   },
   {
     Id: 4,
-    icon: "https://elixirautomation.com/wp-content/uploads/2025/01/Service-5-01.svg",
+    icon: "https://elixirautomation.com/wp-content/uploads/2025/01/Service-4.svg",
     title: "Email Marketing",
   },
   {
     Id: 5,
-    icon: "https://elixirautomation.com/wp-content/uploads/2025/01/Service-4.svg",
+    icon: "https://elixirautomation.com/wp-content/uploads/2025/01/Service-5-01.svg",
     title: "Data Entry",
   },
   {
@@ -143,7 +143,7 @@ const AutomationCanApplied: React.FC = () => {
                     ? "0 10px 25px -5px rgba(179, 75, 152, 0.3)"
                     : "none",
               }}
-              className="relative bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 transition-all duration-300 flex flex-col items-center text-center border-b-4 border-indigo-300 z-20 hover:z-30 group overflow-hidden"
+              className="relative bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 transition-all duration-300 flex flex-col items-center text-center border-b-[6px] border-[#C5BAF8] z-20 hover:z-30 group overflow-hidden"
             >
               {/* Gradient overlay - hidden on mobile */}
               <motion.div
@@ -175,7 +175,7 @@ const AutomationCanApplied: React.FC = () => {
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: window.innerWidth > 768 ? 0.2 : 0 } : {}}
         transition={{ delay: 0.5, duration: 1 }}
-        className="absolute bottom-0 left-0 max-w-[414px] hidden sm:block"
+        className="absolute bottom-0 left-0 max-w-[530px] hidden sm:block"
         src="https://elixirautomation.com/wp-content/uploads/2025/01/Vector-Smart-Object.png"
         alt="background"
       />

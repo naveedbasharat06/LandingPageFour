@@ -27,11 +27,11 @@ const ToolsWeLove: React.FC = () => {
   const isInView = useInView(ref, { once: false, amount: 0.3 });
 
   // Duplicate the items to create a seamless loop
-  const duplicatedTools = [
-    ...toolsWeLoveData,
-    ...toolsWeLoveData,
-    ...toolsWeLoveData,
-  ];
+  // const duplicatedTools = [
+  //   ...toolsWeLoveData,
+  //   ...toolsWeLoveData,
+  //   ...toolsWeLoveData,
+  // ];
 
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -110,7 +110,7 @@ const ToolsWeLove: React.FC = () => {
             className="block lg:hidden items-center "
           />
           <motion.h1
-            className="text-[45px] md:text-[58px] font-bold text-[#272364] leading-[120%]"
+            className="text-[45px] md:text-[58px] font-extrabold text-[#272364] leading-[120%]"
             variants={itemVariants}
           >
             Tools we love
