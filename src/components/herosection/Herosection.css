@@ -2,18 +2,29 @@
   background: url("../../images/heroBg01.jpg") no-repeat center center;
   background-size: cover; /* Ensure full coverage */
   width: 100%; /* Full viewport width */
-  height: 930px; /* Full viewport height */
+  height: 948px; /* Full viewport height */
   margin: 0; /* Remove margins */
   padding: 0; /* Remove padding */
   box-sizing: border-box; /* Ensure box model consistency */
   font-family: "figtree";
   background-attachment: fixed;
   position: relative;
-  /* position: fixed; */
-  background-color: #051330;
 
-  opacity: 0.78;
+  /* position: fixed; */
+  /* background-color: #051330; */
+
+  /* opacity: 0.78; */
   /* transition: background 0.3s, border-radius 0.3s, opacity 0.3s; */
+}
+.herosection_background_overlay {
+  background-color: #051330;
+  opacity: 0.78;
+  z-index: 0;
+  position: absolute;
+  inset: 0;
+  transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
+  width: 100%; /* Full viewport width */
+  height: 948px; /* Full viewport height */
 }
 .hero_section {
   display: flex; /* Enable Flexbox */
@@ -21,9 +32,10 @@
   align-items: center; /* Center vertically */
   align-content: center;
   flex: 1;
+
   /* background: linear-gradient(135deg, #1b1b36, #271752); */
   color: white;
-  padding-top: 155px;
+  padding-top: 150px;
   text-align: center;
 }
 .hero_content {
@@ -31,6 +43,9 @@
 @media (max-width: 1024px) {
   .Hero_section_main {
     width: 100vw; /* Full viewport width */
+    height: 700px;
+  }
+  .herosection_background_overlay {
     height: 700px;
   }
   .hero_section {
@@ -46,7 +61,10 @@
 @media (max-width: 768px) {
   .Hero_section_main {
     width: 100vw; /* Full viewport width */
-    height: 600px;
+    height: 716px;
+  }
+  .herosection_background_overlay {
+    height: 716px;
   }
   .hero_section {
     /* background: linear-gradient(135deg, #1b1b36, #271752); */
@@ -60,6 +78,9 @@
 @media (max-width: 425px) {
   .Hero_section_main {
     width: 100vw; /* Full viewport width */
+    height: 650px;
+  }
+  .herosection_background_overlay {
     height: 650px;
   }
   .hero_section {

@@ -41,27 +41,27 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="pt-4 md:pt-6 lg:pt-3 relative">
-      <div className="max-w-7xl mx-auto px-3 md:px-5">
+    <nav className="pt-4 md:pt-6 lg:pt-[15px] relative">
+      <div className="max-w-[1350px] mx-auto ">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <div className="flex-shrink-0 transition delay-150 duration-300 ease-in-out hover:-translate-y hover:scale-110 cursor-pointer">
             <img
               src={Elixir_logo}
               alt="uifry logo"
-              className="h-auto w-[245px] md:w-[100px]"
+              className="h-auto w-[245px] md:w-[110px]"
             />
           </div>
 
           {/* Desktop Menu */}
-          <div className="destop_nav_links hidden md:flex md:justify-start md:absolute md:ml-40 space-x-4 ">
+          <div className="destop_nav_links hidden md:flex md:justify-start gap-5 md:absolute md:ml-40 space-x-4 ">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setActiveLink(link.name)}
                 className={`z-10 font-bold
-                 py-0 px-5 text-lg  md:justify-start transition-colors ${
+                 py-0 px-5 text-[17px]  md:justify-start transition-colors hover:text-[#B34B98] ${
                    activeLink === link.name
                      ? "text-[#B34B98] font-bold"
                      : "text-white"
@@ -73,12 +73,33 @@ const Navbar = () => {
           </div>
 
           {/* hide our team Button */}
-          <a
-            className="hidden md:flex bg-[#272364] text-[17px] font-bold text-white px-5 py-3 rounded-[100px]  hover:bg-[#B34B98;]"
+          <motion.a
+            className="hidden md:flex bg-[#272364] text-[17px] font-bold text-white px-4 py-2 rounded-[100px] relative overflow-hidden lg:mr-11"
             href="./"
+            initial={false}
+            whileHover={{
+              backgroundColor: "#B34B98",
+              transition: { duration: 0.5, ease: "easeInOut" },
+            }}
+            whileTap={{ scale: 0.95 }}
           >
-            Hide Our Team ➝
-          </a>
+            <motion.span
+              initial={{ opacity: 1 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              className="relative z-10 flex items-center"
+            >
+              Hide Our Team ➝
+            </motion.span>
+
+            {/* Background overlay for smooth transition */}
+            <motion.div
+              initial={{ backgroundColor: "#B34B98", opacity: 0 }}
+              whileHover={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="absolute inset-0 z-0"
+            />
+          </motion.a>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden z-50">

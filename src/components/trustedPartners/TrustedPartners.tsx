@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useCallback, useRef } from "react";
+import { motion, AnimatePresence, PanInfo } from "framer-motion";
 import Intelleges_partner from "../../images/6-1.png";
 import BOAG_partner from "../../images/2.png";
 import CENTRA_partner from "../../images/7-1.png";
@@ -22,6 +22,8 @@ const partners = [
 const TrustedPartners = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [visiblePartners, setVisiblePartners] = useState(4);
+  const [autoSlide, setAutoSlide] = useState(true);
+  const sliderRef = useRef<HTMLDivElement>(null);
 
   // Update visible partners based on screen size
   useEffect(() => {
@@ -44,11 +46,13 @@ const TrustedPartners = () => {
 
   // Auto slide every 5 seconds
   useEffect(() => {
+    if (!autoSlide) return;
+
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev === totalSlides - 1 ? 0 : prev + 1));
-    }, 5000);
+    }, 3000);
     return () => clearInterval(interval);
-  }, [totalSlides]);
+  }, [totalSlides, autoSlide]);
 
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev === totalSlides - 1 ? 0 : prev + 1));
@@ -62,18 +66,36 @@ const TrustedPartners = () => {
     setCurrentSlide(index);
   };
 
-  const visibleItems = partners.slice(
-    currentSlide * visiblePartners,
-    currentSlide * visiblePartners + visiblePartners
-  );
+  const handleDragEnd = (
+    event: MouseEvent | TouchEvent | PointerEvent,
+    info: PanInfo
+  ) => {
+    if (info.offset.x > 50) {
+      prevSlide();
+    } else if (info.offset.x < -50) {
+      nextSlide();
+    }
+  };
+
+  // Get visible partners for current slide
+  const visibleItems = [];
+  for (let i = 0; i < visiblePartners; i++) {
+    const index = (currentSlide * visiblePartners + i) % partners.length;
+    visibleItems.push(partners[index]);
+  }
 
   return (
-    <div className="trusted_partner_main relative flex flex-col py-10">
+    <div
+      className="trusted_partner_main relative flex flex-col py-10"
+      ref={sliderRef}
+      onMouseEnter={() => setAutoSlide(false)}
+      onMouseLeave={() => setAutoSlide(true)}
+    >
       <div className="max-w-[1350px] mx-auto px-4 w-full">
         <p className="text-[17px] font-semibold text-[#B34B98] text-center font-[Figtree]">
           Elixir Automation
         </p>
-        <h2 className="text-[45px] font-extrabold text-[#272364] text-center mb-8 leading-[50px]">
+        <h2 className="text-[45px] font-extrabold text-[#272364] text-center mb-8 leading-1">
           Trusted Partners
         </h2>
 
@@ -85,19 +107,24 @@ const TrustedPartners = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -100 }}
               transition={{ duration: 0.5 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-10"
+              className={`grid grid-cols-1 ${
+                visiblePartners >= 2 ? "sm:grid-cols-2" : ""
+              } ${visiblePartners >= 4 ? "lg:grid-cols-4" : ""} gap-4 px-10`}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              onDragEnd={handleDragEnd}
             >
               {visibleItems.map((partner) => (
                 <motion.div
                   key={partner.id}
                   whileHover={{ scale: 1.05 }}
-                  className="flex flex-col items-center justify-center h-[180px]"
+                  className="flex flex-col items-center justify-center h-[180px] bg-white bg-opacity-10 rounded-xl p-6"
                 >
-                  <div className="w-full flex items-center justify-center md:h-[170px] lg:h-[150px]">
+                  <div className="w-full flex items-center justify-center h-[150px]">
                     <img
                       src={partner.logo}
                       alt={partner.name}
-                      className="trusted_partner_logo rounded-xl max-h-full max-w-full object-contain px-4"
+                      className="trusted_partner_logo max-h-full max-w-full object-contain rounded-xl"
                     />
                   </div>
                 </motion.div>
@@ -108,7 +135,7 @@ const TrustedPartners = () => {
           {/* Navigation Arrows */}
           <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 hover:bg-opacity-50 rounded-full w-12 h-12 flex items-center justify-center transition-all duration-300 z-10"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 bg-opacity-30 hover:bg-opacity-50 rounded-full w-12 h-12 flex items-center justify-center transition-all duration-300 z-10"
             aria-label="Previous slide"
           >
             <svg
@@ -126,7 +153,7 @@ const TrustedPartners = () => {
 
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 hover:bg-opacity-50 rounded-full w-12 h-12 flex items-center justify-center transition-all duration-300 z-10"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 bg-opacity-30 hover:bg-opacity-50 rounded-full w-12 h-12 flex items-center justify-center transition-all duration-300 z-10"
             aria-label="Next slide"
           >
             <svg
@@ -143,18 +170,19 @@ const TrustedPartners = () => {
           </button>
         </div>
 
-        {/* Dots Navigation */}
-        <div className="flex justify-center mt-4 space-x-2">
-          {Array.from({ length: totalSlides }).map((_, index) => (
+        {/* Dots Navigation - Always show all 7 dots */}
+        <div className="flex justify-center mt-2 space-x-2">
+          {Array.from({ length: partners.length }).map((_, index) => (
             <button
               key={index}
-              onClick={() => goToSlide(index)}
+              onClick={() => goToSlide(Math.floor(index + 1))}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                currentSlide === index
-                  ? "bg-black w-6"
+                currentSlide === Math.floor(index + 1)
+                  ? // index+1 (index / visiblePartners)
+                    "bg-black w-6"
                   : "bg-gray-500 bg-opacity-30"
               }`}
-              aria-label={`Go to slide ${index + 1}`}
+              aria-label={`Go to partner ${index + 1}`}
             />
           ))}
         </div>

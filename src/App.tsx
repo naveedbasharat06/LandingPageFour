@@ -4,7 +4,7 @@ import MyComponent from "./MyComponents";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App overflow-scroll">
       <MyComponent />
     </div>
   );

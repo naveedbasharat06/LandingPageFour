@@ -92,7 +92,7 @@ const itemVariants = {
 
 const AutomationCanApplied: React.FC = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false, amount: 0.1 }); // Reduced threshold for mobile
+  const isInView = useInView(ref, { once: false, amount: 0.3 }); // Reduced threshold for mobile
 
   return (
     <div

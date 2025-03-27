@@ -9,13 +9,17 @@ const TrustedPartners = React.lazy(
 const AutomationCanApplied = React.lazy(
   () => import("./components/automationCanApplied/AutomationCanApplied")
 );
+const ToolsWeLove = React.lazy(
+  () => import("./components/toolsWeLove/ToolsWeLove")
+);
 
 const MyComponent: React.FC = () => {
   return (
-    <div>
+    <div className="">
       <HeroSection />
       <TrustedPartners />
       <AutomationCanApplied />
+      <ToolsWeLove />
     </div>
   );
 };
