@@ -131,6 +131,9 @@ const ToolsWeLove: React.FC = () => {
               dragConstraints={{ left: -1000, right: 1000 }}
               onDragEnd={handleDragEnd}
               animate={controls}
+              // initial={{ opacity: 0 }}
+              // animate={isInView ? { opacity: 1 } : {}}
+              // transition={{ delay: 0.5, duration: 1 }} // wil un comment when use it
               className="flex gap-3 md:gap-5 lg:gap-8 cursor-grab active:cursor-grabbing"
               whileTap={{ cursor: "grabbing" }}
             >

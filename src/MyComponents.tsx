@@ -1,4 +1,5 @@
 import React from "react";
+import BookingCalendar from "./components/bookingCalender/BookingCalender";
 
 const HeroSection = React.lazy(
   () => import("./components/herosection/HeroSection")
@@ -23,8 +24,8 @@ const MyComponent: React.FC = () => {
       <TrustedPartners />
       <AutomationCanApplied />
       <ToolsWeLove />
-
       <MeetOurExpertTeam />
+      <BookingCalendar />
     </div>
   );
 };

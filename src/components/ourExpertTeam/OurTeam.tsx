@@ -133,13 +133,12 @@ const MeetOurExpertTeam: React.FC = () => {
               <p className="text-center text-base pt-2 underline text-[#272364] font-bold">
                 {item.Id === 2 ? `♪ ${item.tiktok}` : ""}
               </p>
-
-              <img
-                src="https://elixirautomation.com/wp-content/uploads/2025/01/Vector-Smart-Objectcv-1.png"
-                alt="bg grandiant"
-                className="absolute bottom-0 left-0 opacity-30 w-[45%] z-0"
-              />
             </div>
+            <img
+              src="https://elixirautomation.com/wp-content/uploads/2025/01/Vector-Smart-Objectcv-1.png"
+              alt="bg grandiant"
+              className="absolute bottom-0 left-0 opacity-30 w-[45%] z-0"
+            />
           </motion.div>
         ))}
       </motion.div>

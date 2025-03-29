@@ -7,15 +7,15 @@
 }
 .ourTeam_backgroung_overlay {
   background-image: url("https://elixirautomation.com/wp-content/uploads/2025/01/Tech-Overlay-01-1.svg");
-  transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
+  transition: Background 0.3s, border-radius 0.3s, opacity 0.3s;
   border-radius: 14px 14px 14px 14px;
   background-repeat: no-repeat;
-
   opacity: 0.47;
+  bottom: 0;
   background-size: 100% auto;
   inset: 0;
   position: absolute;
-  /* box-sizing: border-box; */
+  box-sizing: border-box;
 }
 /* Responsive adjustments */
 @media (max-width: 768px) {
