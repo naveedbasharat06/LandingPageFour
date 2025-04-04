@@ -170,6 +170,10 @@
   background-color: #b34b98;
   color: white;
 }
+.day-cell.isSelectable {
+  background-color: white;
+  color: black;
+}
 
 .day-cell.disabled {
   color: #ccc;
@@ -187,8 +191,8 @@
   font-size: 16px;
   font-weight: 600;
   color: #272364;
-  margin: 15px 0;
-  text-align: center;
+  margin: 10px 0;
+  /* text-align: center; */
 }
 
 /* Time selection sidebar */

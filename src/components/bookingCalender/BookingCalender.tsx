@@ -252,7 +252,9 @@ const BookingCalendar: React.FC = () => {
           key={`day-${day}`}
           className={`day-cell ${isPast ? "disabled" : ""} ${
             isSelected ? "selected" : ""
-          } ${isWeekend ? "weekend" : ""}`}
+          } ${isWeekend ? "weekend" : ""} ${
+            !isSelectable ? "isSelectable" : ""
+          }`}
           onClick={() => isSelectable && !isPast && handleDateClick(date)}
           disabled={!isSelectable || isPast}
         >
@@ -395,11 +397,11 @@ const BookingCalendar: React.FC = () => {
             <div className="days-grid">{renderCalendarDays()}</div>
 
             {/* Selected date display */}
-            {selectedDate && (
+            {/* {selectedDate && (
               <div className="selected-date-display">
                 {formatSelectedDate()}
               </div>
-            )}
+            )} */}
 
             {/* Timezone selector */}
             <div className="timezone-selector mt-8">
@@ -429,6 +431,12 @@ const BookingCalendar: React.FC = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.3 }}
             >
+              {/* Selected date display */}
+              {selectedDate && (
+                <div className="selected-date-display">
+                  {formatSelectedDate()}
+                </div>
+              )}
               <h3 className="text-lg font-semibold mb-4">Available Times</h3>
               <div className="time-slots">
                 {availableTimeSlots.map((time) => (
