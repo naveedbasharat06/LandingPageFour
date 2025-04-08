@@ -1,3 +1,114 @@
+/* Add these to your BookingCalender.css file */
+
+/* Form styles */
+.booking-summary {
+  background: #f8f6f8;
+  padding: 20px;
+  display: grid;
+  gap: 10px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  color: rgba(26, 26, 26, 0.61);
+  font-weight: 600;
+}
+
+.booking-details {
+  margin-top: 15px;
+}
+
+.booking-details p {
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+}
+
+.booking-details .anticon {
+  margin-right: 8px;
+}
+
+.selected-time {
+  font-weight: 600;
+  color: #272364;
+}
+
+.form-footer {
+  margin-top: 30px;
+}
+
+.terms-notice {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.text-link {
+  color: #0069ff;
+  margin: 0 4px;
+}
+
+/* Confirmation screen styles */
+.confirmation-screen {
+  position: relative;
+  text-align: center;
+  margin: auto;
+  align-items: center;
+  padding: 30px;
+}
+
+.confirmation-message {
+  font-size: 16px;
+
+  color: #333;
+}
+
+.open-invitation-btn {
+  padding: 8px 20px;
+  margin: 15px 0;
+  height: auto;
+}
+
+.confirmation-screen .booking-summary {
+  text-align: left;
+  background: #f0f7ff;
+  border-left: 3px solid #0069ff;
+}
+
+.confirmation-screen .booking-summary h3 {
+  color: #272364;
+  font-size: 20px;
+}
+
+.cookie-settings-btn {
+  margin-top: 30px;
+  color: #0069ff;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Layout adjustments */
+.content-section {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.calendar-section {
+  padding: 25px;
+}
+
+@media (max-width: 768px) {
+  .content-section {
+    flex-direction: column;
+  }
+
+  .time-selection-sidebar {
+    width: 100%;
+    border-top: 1px solid #e0e0e0;
+  }
+}
+/* cp end */
 .apointmentBooking_main {
   background-color: transparent;
   background-image: linear-gradient(168deg, #ffffff 58%, #1c184f 58%);
@@ -62,6 +173,9 @@
   flex-direction: column;
   align-items: center;
   line-height: 1.2;
+  pointer-events: auto;
+  transition: all 0.1s ease-in;
+  /* cp */
 }
 
 .powered-by span {
@@ -80,7 +194,7 @@
 /* form fields style */
 .time-slot-container {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   margin-bottom: 10px;
 }
 
@@ -90,11 +204,11 @@
   width: 100%;
   height: 100%;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .booking-form {
-  padding: 10px;
+  padding: 25px 30px;
 }
 
 .form-title {
@@ -106,6 +220,7 @@
 
 .form-group {
   margin-bottom: 15px;
+  width: 75%;
 }
 
 .form-group label {
@@ -134,9 +249,10 @@
 
 .form-actions {
   display: flex;
+  width: 75%;
   justify-content: flex-end;
   gap: 10px;
-  margin-top: 20px;
+  padding-bottom: 20px;
 }
 @media (max-width: 768px) {
   .powered-by {
@@ -160,6 +276,16 @@
     background: white;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     position: relative;
+  }
+  .form-group {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  .form-actions {
+    width: 100%;
+    justify-content: flex-end;
+    gap: 6px;
+    padding-bottom: 10px;
   }
 }
 
@@ -268,7 +394,7 @@
 }
 
 .day-cell.selected {
-  background-color: #b34b98;
+  background-color: #6a8ae2;
   color: white;
 }
 .day-cell.isSelectable {
@@ -320,7 +446,7 @@
   /* overflow-y: scroll;
   flex: 1; */
   grid-template-columns: 1fr;
-  gap: 10px;
+  gap: 5px;
 }
 
 .time-slot {
@@ -331,12 +457,15 @@
   border: 1px solid rgb(0, 105, 255);
   transition: all 0.2s ease;
   width: 100%;
+
+  /* font-family: "Proxima Nova", sans-serif; */
 }
 
 .time-slot.selected {
-  background-color: #b34b98;
+  background-color: #424042;
   color: white;
-  border-color: #b34b98;
+  font-size: 16px;
+  border: none;
 }
 
 .timezone-selector {

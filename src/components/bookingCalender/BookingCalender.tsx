@@ -1,8 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Select, Button, Modal, Switch } from "antd";
+
 import logo1 from "../../images/logo (1).png";
-import { LeftOutlined, RightOutlined, CloseOutlined } from "@ant-design/icons";
+
+import {
+  LeftOutlined,
+  RightOutlined,
+  CloseOutlined,
+  VideoCameraOutlined,
+  CheckCircleOutlined,
+  CalendarOutlined,
+  GlobalOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import "./BookingCalender.css";
 
 const { Option } = Select;
@@ -51,9 +62,10 @@ const BookingCalendar: React.FC = () => {
   const [isCookieModalVisible, setIsCookieModalVisible] = useState(false);
   const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>([]);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [currentStep, setCurrentStep] = useState<"calendar" | "form">(
-    "calendar"
-  );
+  const [isOpenGuest, setIsOpenGuest] = useState(false);
+  const [currentStep, setCurrentStep] = useState<
+    "calendar" | "form" | "confirmation"
+  >("calendar");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -82,6 +94,10 @@ const BookingCalendar: React.FC = () => {
   // const handleToggle = (type: keyof typeof cookies) => {
   //   setCookies((prev) => ({ ...prev, [type]: !prev[type] }));
   // };
+  // open quest field
+  const isOpenGuestField = () => {
+    setIsOpenGuest(true);
+  };
 
   // Timezone data with current times
   const timeZones = [
@@ -355,14 +371,23 @@ const BookingCalendar: React.FC = () => {
       </div>
 
       <div className="form-group">
-        <label>Add Guests</label>
-        <input
-          type="text"
-          value={formData.guests.join(", ")}
-          onChange={(e) =>
-            setFormData({ ...formData, guests: e.target.value.split(", ") })
-          }
-        />
+        <Button onClick={isOpenGuestField}>{`${
+          isOpenGuest ? "Guest Email(s)" : "Add Guests"
+        }`}</Button>
+        {isOpenGuest && (
+          <>
+            <textarea
+              // type="text"
+              value={formData.guests.join(", ")}
+              onChange={(e) =>
+                setFormData({ ...formData, guests: e.target.value.split(", ") })
+              }
+            />
+            <p className="text-[11px]">
+              Notify up to 10 additional guests of the scheduled event.
+            </p>
+          </>
+        )}
       </div>
 
       <div className="form-group">
@@ -399,19 +424,88 @@ const BookingCalendar: React.FC = () => {
             setFormData({ ...formData, problemToAutomate: e.target.value })
           }
         />
-        <p className="text-sm">
+        <p className="text-xs">
           By proceeding, you confirm that you have read and agree to{" "}
-          <span className="text-blue-500"> Calendly's Terms of Use</span> and{" "}
-          <span className="text-blue-500"> Privacy Notice.</span>
+          <a href="./calendry" className="text-blue-500">
+            {" "}
+            Calendly's Terms of Use
+          </a>{" "}
+          and{" "}
+          <a href="./privacy" className="text-blue-500">
+            {" "}
+            Privacy Notice.
+          </a>
         </p>
       </div>
 
       <div className="form-actions">
-        <Button onClick={() => setCurrentStep("calendar")}>Back</Button>
-        <Button type="primary" onClick={handleSubmit}>
+        <Button
+          className="p-4"
+          shape="round"
+          onClick={() => setCurrentStep("calendar")}
+        >
+          Back
+        </Button>
+        <Button
+          className="p-4 font-semibold"
+          type="primary"
+          shape="round"
+          onClick={handleSubmit}
+        >
           Schedule Event
         </Button>
       </div>
+    </div>
+  );
+  // hanle confirmation message
+  const renderConfirmation = () => (
+    <div className="confirmation-screen">
+      {/* <p className="absolute top-2 left-0">
+        <ArrowLeftOutlined />
+      </p> */}
+      <h2 className="text-2xl font-bold pb-1">
+        {" "}
+        <CheckCircleOutlined style={{ color: "#00a854" }} /> You are scheduled
+      </h2>
+      <p className="confirmation-message">
+        A calendar invitation has been sent to your email address.
+      </p>
+
+      <Button
+        type="default"
+        variant="outlined"
+        shape="round"
+        className="open-invitation-btn"
+      >
+        Open Invitation 💬
+      </Button>
+
+      <div className="booking-summary">
+        <h3 className="text-lg font-semibold">Business Audit</h3>
+        <p>
+          {" "}
+          <UserOutlined /> Julian Stancioff
+        </p>
+        <p>
+          <CalendarOutlined /> {selectedTime} -{" "}
+          {new Date(+20 * 60000).toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
+          ,{formatSelectedDate()}, {new Date().getFullYear()}
+        </p>
+        <p>
+          <GlobalOutlined /> {timeZone}
+        </p>
+        <p>
+          {" "}
+          <VideoCameraOutlined /> Web conferencing details to follow.
+        </p>
+      </div>
+
+      <button className="cookie-settings-btn" onClick={showCookieModal}>
+        Cookie settings
+      </button>
     </div>
   );
   const handleSubmit = () => {
@@ -436,7 +530,12 @@ const BookingCalendar: React.FC = () => {
 
     console.log("Submitting booking:", bookingData);
     // Here you would typically make an API call to submit the booking
+    // Simulate email sending
+    setTimeout(() => {
+      setCurrentStep("confirmation");
+    }, 1000);
   };
+
   const ScrollingText: React.FC = () => {
     return (
       <div className="overflow-hidden whitespace-nowrap bg-[#C5BAF8] ">
@@ -448,6 +547,7 @@ const BookingCalendar: React.FC = () => {
       </div>
     );
   };
+
   return (
     <div className="apointmentBooking_main">
       <motion.div
@@ -486,7 +586,7 @@ const BookingCalendar: React.FC = () => {
             className="block lg:hidden mx-auto mb-4"
           />
           <motion.h1
-            className="text-3xl md:text-[45px] font-bold text-[#272364] leading-[54px] mb-6"
+            className="text-3xl md:text-[45px] font-bold text-[#272364] leading-[54px]"
             variants={itemVariants}
           >
             Schedule A Free AI Audit
@@ -505,12 +605,19 @@ const BookingCalendar: React.FC = () => {
           </div>
 
           {/* Left scrollable section */}
-          <div className="info-section">
+          {/* {
+            currentStep === "confirmation" &&()
+          } */}
+          <div
+            className={`info-section ${
+              currentStep === "confirmation" ? "hidden" : "block"
+            }`}
+          >
             <div className="border-b-2 mb-5 text-center mx-auto">
               <img
                 src="https://d3v0px0pttie1i.cloudfront.net/uploads/branding/logo/ee19a8a4-5a3d-4bc2-a1d5-ccafa4afc1dd/e2b4dd84.png"
                 alt="calendar bg"
-                className="flex justify-center mx-auto items-center min-h-[120px] max-w-[120px]"
+                className="flex justify-center mx-auto pb-3 items-center min-h-[120px] max-w-[120px]"
               />
             </div>
             <div className="info-content">
@@ -522,8 +629,27 @@ const BookingCalendar: React.FC = () => {
               </h4>
               <p className="duration">🕒 20 min</p>
               <p className="conference-details">
-                🎞️ Web conferencing details provided upon confirmation.
+                <VideoCameraOutlined /> Web conferencing details provided upon
+                confirmation.
               </p>
+              {
+                // show calendar and time zone based date & time selection
+              }
+              {currentStep === "form" && (
+                <p className="selected-time">
+                  <CalendarOutlined /> {selectedTime} -{" "}
+                  {new Date(20 * 60000).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                  ,{formatSelectedDate()}, {new Date().getFullYear()}
+                </p>
+              )}
+              {currentStep === "form" && (
+                <p>
+                  <GlobalOutlined /> {timeZone}
+                </p>
+              )}
               <p className="welcome-message">
                 Welcome to Elixir Automation's booking page!
                 <br />
@@ -532,7 +658,7 @@ const BookingCalendar: React.FC = () => {
               </p>
               <button
                 onClick={() => setExpanded(!expanded)}
-                className="block md:hidden  mt-1 text-gray-600 font-semibold hover:underline "
+                className="mt-1 text-gray-600 font-semibold hover:underline text-sm "
               >
                 {expanded ? "Show less" : "Show more"}
               </button>
@@ -547,9 +673,9 @@ const BookingCalendar: React.FC = () => {
 
           {/* Right calendar section */}
 
-          <div className="calendar-section">
-            {currentStep === "calendar" ? (
-              <>
+          {currentStep === "calendar" && (
+            <>
+              <div className="calendar-section">
                 <h2 className="pl-2 font-bold text-xl mb-5">
                   Select a Date & Time
                 </h2>
@@ -619,71 +745,54 @@ const BookingCalendar: React.FC = () => {
                     ))}
                   </Select>
                 </div>
-              </>
-            ) : (
-              renderForm()
-            )}
-          </div>
-          {/* Time selection (positioned to the right) */}
-          {selectedDate && (
-            <motion.div
-              className="time-selection-sidebar"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              {/* Selected date display */}
-              {selectedDate && (
-                <div className="selected-date-display">
-                  {formatSelectedDate()}
-                </div>
-              )}
-              <h3 className="text-lg font-semibold mb-4">Available Times</h3>
-              <div className="time-slots">
-                {/* {availableTimeSlots.map((time) => (
-                  <Button
-                    key={time}
-                    type={selectedTime === time ? "primary" : "default"}
-                    className={`time-slot font-bold ${
-                      selectedTime === time ? "selected" : ""
-                    }`}
-                    onClick={() => setSelectedTime(time)}
-                  >
-                    {time}
-               
-                    {selectedTime === time && (
-                      <>
-                        
-                        <button className="bg-blue-500">Next</button>
-                      </>
-                    )}
-                  </Button>
-                ))} */}
-                {availableTimeSlots.map((time) => (
-                  <div key={time} className="time-slot-container">
-                    <Button
-                      type={selectedTime === time ? "primary" : "default"}
-                      className={`time-slot font-bold ${
-                        selectedTime === time ? "selected" : ""
-                      }`}
-                      onClick={() => setSelectedTime(time)}
-                    >
-                      {time}
-                    </Button>
-                    {selectedTime === time && (
-                      <Button
-                        type="primary"
-                        className="next-button"
-                        onClick={() => setCurrentStep("form")}
-                      >
-                        Next
-                      </Button>
-                    )}
-                  </div>
-                ))}
               </div>
-            </motion.div>
+              {selectedDate && (
+                <motion.div
+                  className="time-selection-sidebar"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {/* Selected date display */}
+                  {selectedDate && (
+                    <div className="selected-date-display">
+                      {formatSelectedDate()}
+                    </div>
+                  )}
+                  <h3 className="text-lg font-semibold mb-4">
+                    Available Times
+                  </h3>
+                  <div className="time-slots">
+                    {availableTimeSlots.map((time) => (
+                      <div key={time} className="time-slot-container">
+                        <Button
+                          type={selectedTime === time ? "primary" : "default"}
+                          className={`time-slot font-bold ${
+                            selectedTime === time ? "selected" : ""
+                          }`}
+                          onClick={() => setSelectedTime(time)}
+                        >
+                          {time}
+                        </Button>
+                        {selectedTime === time && (
+                          <Button
+                            type="primary"
+                            className="next-button"
+                            onClick={() => setCurrentStep("form")}
+                          >
+                            Next
+                          </Button>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </>
           )}
+          {currentStep === "form" && renderForm()}
+          {currentStep === "confirmation" && renderConfirmation()}
+          {/* Time selection (positioned to the right) */}
 
           <button
             className=" block md:hidden relative top-2 text-blue-400 text-sm md:text-base"
@@ -792,27 +901,6 @@ const BookingCalendar: React.FC = () => {
                     </AnimatePresence>
                   </div>
                 ))}
-                {/* <div className="flex justify-between items-center">
-                  <span>+ Functional Cookies</span>
-                  <Switch
-                    checked={cookies.functional}
-                    onChange={() => handleToggle("functional")}
-                  />
-                </div>
-                <div className="flex justify-between items-center">
-                  <span>+ Performance Cookies</span>
-                  <Switch
-                    checked={cookies.performance}
-                    onChange={() => handleToggle("performance")}
-                  />
-                </div>
-                <div className="flex justify-between items-center">
-                  <span>+ Targeting Cookies</span>
-                  <Switch
-                    checked={cookies.targeting}
-                    onChange={() => handleToggle("targeting")}
-                  />
-                </div> */}
               </div>
             </div>
 
