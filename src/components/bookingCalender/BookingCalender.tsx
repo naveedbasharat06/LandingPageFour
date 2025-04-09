@@ -51,12 +51,17 @@ const faqData: FAQItem[] = [
       "These cookies may be set through our site by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant adverts on other sites. They do not store directly personal information, but are based on uniquely identifying your browser and internet device. If you do not allow these cookies, you will experience less targeted advertising.",
   },
 ];
+const date = `☯︎ Pakistan, Maldives Time (${
+  new Date().getHours() > 12
+    ? new Date().getHours() - 12
+    : new Date().getHours()
+}:${new Date().getMinutes()}${new Date().getHours() >= 12 ? "pm" : "am"}) `;
 const BookingCalendar: React.FC = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.3 });
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
-  const [timeZone, setTimeZone] = useState("Asia/Singapore");
+  const [timeZone, setTimeZone] = useState(date);
   const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
   const [availableMonths, setAvailableMonths] = useState<Date[]>([]);
   const [isCookieModalVisible, setIsCookieModalVisible] = useState(false);
@@ -100,54 +105,234 @@ const BookingCalendar: React.FC = () => {
   };
 
   // Timezone data with current times
-  const timeZones = [
+  // const timeZones = [
+  //   {
+  //     value: "Asia/Singapore",
+  //     label: "Singapore (SGT)",
+  //     currentTime: new Date().toLocaleTimeString("en-US", {
+  //       timeZone: "Asia/Singapore",
+  //       hour: "2-digit",
+  //       minute: "2-digit",
+  //     }),
+  //   },
+  //   {
+  //     value: "America/New_York",
+  //     label: "New York (EST)",
+  //     currentTime: new Date().toLocaleTimeString("en-US", {
+  //       timeZone: "America/New_York",
+  //       hour: "2-digit",
+  //       minute: "2-digit",
+  //     }),
+  //   },
+  //   {
+  //     value: "Europe/London",
+  //     label: "London (GMT)",
+  //     currentTime: new Date().toLocaleTimeString("en-US", {
+  //       timeZone: "Europe/London",
+  //       hour: "2-digit",
+  //       minute: "2-digit",
+  //     }),
+  //   },
+  //   {
+  //     value: "Asia/Tokyo",
+  //     label: "Tokyo (JST)",
+  //     currentTime: new Date().toLocaleTimeString("en-US", {
+  //       timeZone: "Asia/Tokyo",
+  //       hour: "2-digit",
+  //       minute: "2-digit",
+  //     }),
+  //   },
+  //   {
+  //     value: "Australia/Sydney",
+  //     label: "Sydney (AEST)",
+  //     currentTime: new Date().toLocaleTimeString("en-US", {
+  //       timeZone: "Australia/Sydney",
+  //       hour: "2-digit",
+  //       minute: "2-digit",
+  //     }),
+  //   },
+  // ];
+  interface TimeZoneOption {
+    value: string;
+    label: string;
+    currentTime: string;
+  }
+  const timeZones: TimeZoneOption[] = [
+    { value: "Pacific/Niue", label: "Niue (NUT)", currentTime: "2:14am" },
     {
-      value: "Asia/Singapore",
-      label: "Singapore (SGT)",
-      currentTime: new Date().toLocaleTimeString("en-US", {
-        timeZone: "Asia/Singapore",
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
+      value: "Pacific/Pago_Pago",
+      label: "Pago Pago (SST)",
+      currentTime: "3:14am",
     },
+    {
+      value: "Pacific/Honolulu",
+      label: "Honolulu (HST)",
+      currentTime: "3:14am",
+    },
+    {
+      value: "America/Anchorage",
+      label: "Anchorage (AKST)",
+      currentTime: "5:14am",
+    },
+    {
+      value: "America/Los_Angeles",
+      label: "Los Angeles (PST)",
+      currentTime: "6:14am",
+    },
+    { value: "America/Denver", label: "Denver (MST)", currentTime: "7:14am" },
+    { value: "America/Chicago", label: "Chicago (CST)", currentTime: "8:14am" },
     {
       value: "America/New_York",
       label: "New York (EST)",
-      currentTime: new Date().toLocaleTimeString("en-US", {
-        timeZone: "America/New_York",
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
+      currentTime: "9:14am",
     },
     {
-      value: "Europe/London",
-      label: "London (GMT)",
-      currentTime: new Date().toLocaleTimeString("en-US", {
-        timeZone: "Europe/London",
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
+      value: "America/Halifax",
+      label: "Halifax (AST)",
+      currentTime: "10:14am",
     },
     {
-      value: "Asia/Tokyo",
-      label: "Tokyo (JST)",
-      currentTime: new Date().toLocaleTimeString("en-US", {
-        timeZone: "Asia/Tokyo",
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
+      value: "America/St_Johns",
+      label: "St. Johns (NST)",
+      currentTime: "10:44am",
     },
+    {
+      value: "America/Sao_Paulo",
+      label: "Sao Paulo (BRT)",
+      currentTime: "11:14am",
+    },
+    {
+      value: "Atlantic/Cape_Verde",
+      label: "Cape Verde (CVT)",
+      currentTime: "12:14pm",
+    },
+    { value: "Europe/London", label: "London (GMT)", currentTime: "1:14pm" },
+    { value: "Europe/Paris", label: "Paris (CET)", currentTime: "2:14pm" },
+    { value: "Europe/Athens", label: "Athens (EET)", currentTime: "3:14pm" },
+    { value: "Europe/Moscow", label: "Moscow (MSK)", currentTime: "4:14pm" },
+    { value: "Asia/Dubai", label: "Dubai (GST)", currentTime: "5:14pm" },
+    { value: "Asia/Karachi", label: "Karachi (PKT)", currentTime: "6:14pm" },
+    { value: "Asia/Kolkata", label: "Kolkata (IST)", currentTime: "6:44pm" },
+    { value: "Asia/Dhaka", label: "Dhaka (BST)", currentTime: "7:14pm" },
+    { value: "Asia/Bangkok", label: "Bangkok (ICT)", currentTime: "8:14pm" },
+    { value: "Asia/Shanghai", label: "Shanghai (CST)", currentTime: "9:14pm" },
+    { value: "Asia/Tokyo", label: "Tokyo (JST)", currentTime: "10:14pm" },
     {
       value: "Australia/Sydney",
-      label: "Sydney (AEST)",
-      currentTime: new Date().toLocaleTimeString("en-US", {
-        timeZone: "Australia/Sydney",
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
+      label: "Sydney (AEDT)",
+      currentTime: "11:14pm",
     },
-  ];
-
+    {
+      value: "Pacific/Norfolk",
+      label: "Norfolk Island (NFT)",
+      currentTime: "12:14am",
+    },
+    {
+      value: "Pacific/Auckland",
+      label: "Auckland (NZDT)",
+      currentTime: "1:14am",
+    },
+    {
+      value: "Pacific/Chatham",
+      label: "Chatham (CHADT)",
+      currentTime: "1:59am",
+    },
+    {
+      value: "Pacific/Tongatapu",
+      label: "Tongatapu (TOT)",
+      currentTime: "2:14am",
+    },
+    {
+      value: "Pacific/Kiritimati",
+      label: "Kiritimati (LINT)",
+      currentTime: "3:14am",
+    },
+    { value: "America/Adak", label: "Adak (HADT)", currentTime: "4:14am" },
+    { value: "America/Phoenix", label: "Phoenix (MST)", currentTime: "7:14am" },
+    { value: "America/Toronto", label: "Toronto (EST)", currentTime: "9:14am" },
+    {
+      value: "America/Vancouver",
+      label: "Vancouver (PST)",
+      currentTime: "6:14am",
+    },
+    { value: "America/Bogota", label: "Bogota (COT)", currentTime: "9:14am" },
+    { value: "America/Caracas", label: "Caracas (VET)", currentTime: "9:44am" },
+    {
+      value: "America/Santiago",
+      label: "Santiago (CLST)",
+      currentTime: "11:14am",
+    },
+    {
+      value: "America/Argentina/Buenos_Aires",
+      label: "Buenos Aires (ART)",
+      currentTime: "11:14am",
+    },
+    { value: "America/Godthab", label: "Nuuk (WGT)", currentTime: "12:14pm" },
+    {
+      value: "Atlantic/Azores",
+      label: "Azores (AZOT)",
+      currentTime: "12:14pm",
+    },
+    {
+      value: "Africa/Casablanca",
+      label: "Casablanca (WET)",
+      currentTime: "1:14pm",
+    },
+    { value: "Africa/Lagos", label: "Lagos (WAT)", currentTime: "2:14pm" },
+    {
+      value: "Africa/Johannesburg",
+      label: "Johannesburg (SAST)",
+      currentTime: "3:14pm",
+    },
+    { value: "Asia/Beirut", label: "Beirut (EET)", currentTime: "3:14pm" },
+    {
+      value: "Asia/Jerusalem",
+      label: "Jerusalem (IST)",
+      currentTime: "3:14pm",
+    },
+    { value: "Asia/Baghdad", label: "Baghdad (AST)", currentTime: "4:14pm" },
+    { value: "Asia/Tehran", label: "Tehran (IRST)", currentTime: "4:44pm" },
+    {
+      value: "Asia/Yekaterinburg",
+      label: "Yekaterinburg (YEKT)",
+      currentTime: "6:14pm",
+    },
+    { value: "Asia/Almaty", label: "Almaty (ALMT)", currentTime: "7:14pm" },
+    {
+      value: "Asia/Novosibirsk",
+      label: "Novosibirsk (NOVT)",
+      currentTime: "8:14pm",
+    },
+    {
+      value: "Asia/Krasnoyarsk",
+      label: "Krasnoyarsk (KRAT)",
+      currentTime: "9:14pm",
+    },
+    { value: "Asia/Irkutsk", label: "Irkutsk (IRKT)", currentTime: "10:14pm" },
+    { value: "Asia/Yakutsk", label: "Yakutsk (YAKT)", currentTime: "11:14pm" },
+    {
+      value: "Asia/Vladivostok",
+      label: "Vladivostok (VLAT)",
+      currentTime: "12:14am",
+    },
+    { value: "Asia/Magadan", label: "Magadan (MAGT)", currentTime: "1:14am" },
+    {
+      value: "Asia/Kamchatka",
+      label: "Kamchatka (PETT)",
+      currentTime: "2:14am",
+    },
+    { value: "Pacific/Fiji", label: "Fiji (FJT)", currentTime: "1:14am" },
+    { value: "Pacific/Guam", label: "Guam (ChST)", currentTime: "11:14pm" },
+    { value: "Pacific/Majuro", label: "Majuro (MHT)", currentTime: "1:14am" },
+    { value: "Pacific/Tahiti", label: "Tahiti (TAHT)", currentTime: "3:14am" },
+  ].map((tz) => ({
+    ...tz,
+    currentTime: new Date().toLocaleTimeString("en-US", {
+      timeZone: tz.value,
+      hour: "2-digit",
+      minute: "2-digit",
+    }),
+  }));
   // Initialize available months (current and next month)
   useEffect(() => {
     const now = new Date();
@@ -347,7 +532,12 @@ const BookingCalendar: React.FC = () => {
   };
   // form submission
   const renderForm = () => (
-    <div className="booking-form">
+    <motion.div
+      initial={{ opacity: 0, x: 100 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.8, ease: "easeInOut" }}
+      className="booking-form"
+    >
       <h2 className="form-title">Enter Details</h2>
 
       <div className="form-group">
@@ -371,9 +561,12 @@ const BookingCalendar: React.FC = () => {
       </div>
 
       <div className="form-group">
-        <Button onClick={isOpenGuestField}>{`${
-          isOpenGuest ? "Guest Email(s)" : "Add Guests"
-        }`}</Button>
+        <Button
+          // color="default"
+          className={`border border-blue-400 text-blue-400`}
+          variant="outlined"
+          onClick={isOpenGuestField}
+        >{`${isOpenGuest ? "Guest Email(s)" : "Add Guests"}`}</Button>
         {isOpenGuest && (
           <>
             <textarea
@@ -455,11 +648,16 @@ const BookingCalendar: React.FC = () => {
           Schedule Event
         </Button>
       </div>
-    </div>
+    </motion.div>
   );
   // hanle confirmation message
   const renderConfirmation = () => (
-    <div className="confirmation-screen">
+    <motion.div
+      initial={{ opacity: 0, x: 100 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.9, ease: "easeInOut" }}
+      className="confirmation-screen"
+    >
       {/* <p className="absolute top-2 left-0">
         <ArrowLeftOutlined />
       </p> */}
@@ -469,17 +667,26 @@ const BookingCalendar: React.FC = () => {
       </h2>
       <p className="confirmation-message">
         A calendar invitation has been sent to your email address.
+        {/* {formData.email} */}
       </p>
-
       <Button
         type="default"
         variant="outlined"
         shape="round"
         className="open-invitation-btn"
+        onClick={() => {
+          alert(`Invitation sent to ${formData.email}`);
+          // In a real app, this would open the calendar event
+          window.open(
+            `https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20240410T090000Z/20240410T093000Z&text=Business+Audit&details=Meeting+with+${encodeURIComponent(
+              formData.name
+            )}&location=Video+Call`,
+            "_blank"
+          );
+        }}
       >
         Open Invitation 💬
       </Button>
-
       <div className="booking-summary">
         <h3 className="text-lg font-semibold">Business Audit</h3>
         <p>
@@ -502,11 +709,17 @@ const BookingCalendar: React.FC = () => {
           <VideoCameraOutlined /> Web conferencing details to follow.
         </p>
       </div>
-
-      <button className="cookie-settings-btn" onClick={showCookieModal}>
+      <Button
+        className="p-1"
+        shape="round"
+        onClick={() => setCurrentStep("form")}
+      >
+        Back
+      </Button>{" "}
+      <Button className="cookie-settings-btn" onClick={showCookieModal}>
         Cookie settings
-      </button>
-    </div>
+      </Button>
+    </motion.div>
   );
   const handleSubmit = () => {
     // Validate form
@@ -599,10 +812,14 @@ const BookingCalendar: React.FC = () => {
           animate={isInView ? "visible" : "hidden"}
         >
           {/* Powered by Calendry ribbon */}
-          <div className="powered-by">
+          <a
+            href="https://calendly.com/landing/booking-badge?utm_campaign=sign_up&utm_medium=badge&utm_source=invitee"
+            target="_blan"
+            className="powered-by"
+          >
             <span>POWERED BY</span>
             <strong>Calendry</strong>
-          </div>
+          </a>
 
           {/* Left scrollable section */}
           {/* {
@@ -621,10 +838,10 @@ const BookingCalendar: React.FC = () => {
               />
             </div>
             <div className="info-content">
-              <h3 className="text-base text-black opacity-35 leading-[24px] font-bold">
+              <h3 className="text-base text-black opacity-60 leading-[24px] font-semibold">
                 Julian Stancioff
               </h3>
-              <h4 className="text-[28px] font-bold text-black">
+              <h4 className="text-[28px] font-bold text-[#0a2540]">
                 Business Audit
               </h4>
               <p className="duration">🕒 20 min</p>
@@ -647,7 +864,7 @@ const BookingCalendar: React.FC = () => {
               )}
               {currentStep === "form" && (
                 <p>
-                  <GlobalOutlined /> {timeZone}
+                  <GlobalOutlined /> {timeZone} Time
                 </p>
               )}
               <p className="welcome-message">
@@ -664,7 +881,7 @@ const BookingCalendar: React.FC = () => {
               </button>
             </div>
             <button
-              className="hidden md:block relative top-2 text-blue-400 text-sm md:text-base"
+              className="hidden md:block relative top-2 text-blue-500 text-xs md:text-sm hover:underline"
               onClick={showCookieModal}
             >
               Cookie settings
@@ -715,32 +932,32 @@ const BookingCalendar: React.FC = () => {
 
                 <div className="days-grid">{renderCalendarDays()}</div>
 
-                {/* Selected date display */}
-                {/* {selectedDate && (
-              <div className="selected-date-display">
-                {formatSelectedDate()}
-              </div>
-            )} */}
-
-                {/* Timezone selector */}
                 <div className="timezone-selector mt-8">
                   <label className="block text-sm font-medium text-gray-900 mb-2">
                     Time zone
                   </label>
                   <Select
+                    showSearch
                     value={timeZone}
+                    variant="filled"
                     onChange={setTimeZone}
                     className="timezone-dropdown w-full"
                     size="small"
+                    optionFilterProp="children"
+                    filterOption={(
+                      input: string,
+                      option?: { children?: string }
+                    ) => {
+                      if (!option?.children) return false;
+                      return option.children
+                        .toLowerCase()
+                        .includes(input.toLowerCase());
+                    }}
+                    placeholder="Search..."
                   >
-                    <input
-                      type="text"
-                      placeholder="Search..."
-                      className="bg-white border-2 border-blue-500"
-                    />
                     {timeZones.map((tz) => (
                       <Option key={tz.value} value={tz.value}>
-                        {tz.label} ({tz.currentTime})
+                        ☯︎ {tz.label} ({tz.currentTime})
                       </Option>
                     ))}
                   </Select>
@@ -749,41 +966,62 @@ const BookingCalendar: React.FC = () => {
               {selectedDate && (
                 <motion.div
                   className="time-selection-sidebar"
-                  initial={{ opacity: 0, x: 20 }}
+                  initial={{ opacity: 0, x: 30 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.7, ease: "easeInOut" }}
                 >
                   {/* Selected date display */}
                   {selectedDate && (
-                    <div className="selected-date-display">
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.2 }}
+                      className="selected-date-display"
+                    >
                       {formatSelectedDate()}
-                    </div>
+                    </motion.div>
                   )}
                   <h3 className="text-lg font-semibold mb-4">
                     Available Times
                   </h3>
                   <div className="time-slots">
                     {availableTimeSlots.map((time) => (
-                      <div key={time} className="time-slot-container">
-                        <Button
-                          type={selectedTime === time ? "primary" : "default"}
-                          className={`time-slot font-bold ${
-                            selectedTime === time ? "selected" : ""
-                          }`}
-                          onClick={() => setSelectedTime(time)}
-                        >
-                          {time}
-                        </Button>
-                        {selectedTime === time && (
+                      <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.9, ease: "easeInOut" }}
+                        key={time}
+                        className="time-slot-container"
+                      >
+                        <AnimatePresence>
                           <Button
-                            type="primary"
-                            className="next-button"
-                            onClick={() => setCurrentStep("form")}
+                            type={selectedTime === time ? "primary" : "default"}
+                            className={`time-slot font-bold ${
+                              selectedTime === time ? "selected" : ""
+                            }`}
+                            onClick={() => setSelectedTime(time)}
                           >
-                            Next
+                            {time}
                           </Button>
-                        )}
-                      </div>
+
+                          {selectedTime === time && (
+                            <motion.div
+                              initial={{ opacity: 0, x: 20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              exit={{ opacity: 0, x: -20 }}
+                              transition={{ duration: 0.5, ease: "easeInOut" }}
+                            >
+                              <Button
+                                type="primary"
+                                className="next-button"
+                                onClick={() => setCurrentStep("form")}
+                              >
+                                Next
+                              </Button>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </motion.div>
                     ))}
                   </div>
                 </motion.div>
@@ -802,6 +1040,7 @@ const BookingCalendar: React.FC = () => {
           </button>
         </motion.div>
         {/* Cookie Settings Modal */}
+
         <Modal
           open={isCookieModalVisible}
           footer={null}
@@ -821,6 +1060,7 @@ const BookingCalendar: React.FC = () => {
                 <CloseOutlined />
               </button>
             </span>
+            <hr className="mt-2 mb-2" />
             <h2 className="text-xl leading-1 font-bold text-[#476788]">
               Privacy Preference Center
             </h2>

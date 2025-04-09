@@ -1,5 +1,4 @@
 import React from "react";
-import BookingCalendar from "./components/bookingCalender/BookingCalender";
 
 const HeroSection = React.lazy(
   () => import("./components/herosection/HeroSection")
@@ -16,6 +15,10 @@ const ToolsWeLove = React.lazy(
 const MeetOurExpertTeam = React.lazy(
   () => import("./components/ourExpertTeam/OurTeam")
 );
+const BookingCalendar = React.lazy(
+  () => import("./components/bookingCalender/BookingCalender")
+);
+const Footer = React.lazy(() => import("./components/footer/Footer"));
 
 const MyComponent: React.FC = () => {
   return (
@@ -26,6 +29,7 @@ const MyComponent: React.FC = () => {
       <ToolsWeLove />
       <MeetOurExpertTeam />
       <BookingCalendar />
+      <Footer />
     </div>
   );
 };

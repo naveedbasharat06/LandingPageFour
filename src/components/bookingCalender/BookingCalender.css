@@ -1,3 +1,16 @@
+/* Add to your BookingCalender.css */
+.ant-select-selection-search-input {
+  padding: 0 11px !important;
+}
+
+.timezone-dropdown .ant-select-selector {
+  border-radius: 4px !important;
+  cursor: pointer;
+}
+
+.timezone-dropdown .ant-select-selection-placeholder {
+  color: #666 !important;
+}
 /* Add these to your BookingCalender.css file */
 
 /* Form styles */
@@ -98,16 +111,6 @@
   padding: 25px;
 }
 
-@media (max-width: 768px) {
-  .content-section {
-    flex-direction: column;
-  }
-
-  .time-selection-sidebar {
-    width: 100%;
-    border-top: 1px solid #e0e0e0;
-  }
-}
 /* cp end */
 .apointmentBooking_main {
   background-color: transparent;
@@ -160,27 +163,34 @@
   position: absolute;
   top: 20px;
   right: -30px;
-  z-index: 10;
-  background: #505960;
-  color: white;
-  padding: 5px 30px;
+  z-index: 1;
+  /* display: block; */
+  width: 160px;
+  background-color: rgb(80, 89, 96);
+  color: rgb(255, 255, 255);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px 0px;
   font-size: 10px;
   transform: rotate(45deg);
   transform-origin: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
   display: flex;
+  pointer-events: auto;
   overflow: hidden;
+  padding: 9px 0px 6px;
   flex-direction: column;
   align-items: center;
   line-height: 1.2;
-  pointer-events: auto;
-  transition: all 0.1s ease-in;
+  box-sizing: inherit;
+  /* transition: all 0.1s ease-in; */
+  text-decoration: none;
+  /* font-family: "Proxima Nova", sans-serif; */
+  transition: 0.1s ease-in;
   /* cp */
 }
 
 .powered-by span {
-  font-weight: 700;
   text-transform: uppercase;
+  font-weight: 700;
 }
 
 .powered-by strong {
@@ -254,6 +264,14 @@
   gap: 10px;
   padding-bottom: 20px;
 }
+/* Animation enhancements */
+.day-cell {
+  transform-origin: center;
+}
+
+.day-cell.selected {
+  transform: scale(1.05);
+}
 @media (max-width: 768px) {
   .powered-by {
     top: 15px;
@@ -287,20 +305,21 @@
     gap: 6px;
     padding-bottom: 10px;
   }
-}
+  .content-section {
+    flex-direction: column;
+  }
 
-@media (min-width: 768px) {
-  .calendar-wrapper {
-    /* flex-direction: row; */
-    /* display: grid; */
-    /* min-height: 600px; */
+  .time-selection-sidebar {
+    width: 100%;
+    border-top: 1px solid #e0e0e0;
   }
 }
 
 .info-section {
-  background-color: #f8f6f8;
+  background-color: white;
   padding: 20px;
   overflow-y: scroll;
+  border-right: 1px solid rgb(224, 221, 221);
   flex: 1;
 }
 
@@ -362,6 +381,7 @@
   justify-content: center;
   grid-template-columns: repeat(7, 1fr);
   text-align: center;
+  /* margin-left: 6px; */
   font-weight: 400;
   margin-bottom: 15px;
 }
@@ -486,14 +506,14 @@
 .conference-details {
   margin: 15px 0;
   font-size: 16px;
+  font-weight: 600;
   color: rgba(26, 26, 26, 0.61);
-  font-weight: 500;
 }
 
 .welcome-message {
   margin-top: 15px;
-  line-height: 1.6;
-  font-size: 15px;
+  line-height: 1.5;
+  font-size: 16px;
   color: rgba(26, 26, 26, 0.61);
 }
 
@@ -525,7 +545,7 @@
 }
 
 /* Responsive adjustments */
-@media (max-width: 1024px) {
+/* @media (max-width: 1024px) {
   .time-selection-sidebar {
     position: static;
     width: 100%;
@@ -533,7 +553,7 @@
     border-top: 1px solid #e0e0e0;
     box-shadow: none;
   }
-}
+} */
 
 @media (max-width: 767px) {
   .info-section {
@@ -565,13 +585,4 @@
   .timezone-dropdown {
     width: 100%;
   }
-}
-
-/* Animation enhancements */
-.day-cell {
-  transform-origin: center;
-}
-
-.day-cell.selected {
-  transform: scale(1.05);
 }
