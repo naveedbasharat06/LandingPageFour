@@ -68,6 +68,8 @@ const BookingCalendar: React.FC = () => {
   const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>([]);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [isOpenGuest, setIsOpenGuest] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isOpeningInvitation, setIsOpeningInvitation] = useState(false);
   const [currentStep, setCurrentStep] = useState<
     "calendar" | "form" | "confirmation"
   >("calendar");
@@ -565,6 +567,7 @@ const BookingCalendar: React.FC = () => {
           // color="default"
           className={`border border-blue-400 text-blue-400`}
           variant="outlined"
+          shape="round"
           onClick={isOpenGuestField}
         >{`${isOpenGuest ? "Guest Email(s)" : "Add Guests"}`}</Button>
         {isOpenGuest && (
@@ -644,8 +647,9 @@ const BookingCalendar: React.FC = () => {
           type="primary"
           shape="round"
           onClick={handleSubmit}
+          loading={isSubmitting}
         >
-          Schedule Event
+          {isSubmitting ? "Scheduling..." : "Schedule Event"}
         </Button>
       </div>
     </motion.div>
@@ -674,18 +678,23 @@ const BookingCalendar: React.FC = () => {
         variant="outlined"
         shape="round"
         className="open-invitation-btn"
+        loading={isOpeningInvitation}
         onClick={() => {
-          alert(`Invitation sent to ${formData.email}`);
-          // In a real app, this would open the calendar event
-          window.open(
-            `https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20240410T090000Z/20240410T093000Z&text=Business+Audit&details=Meeting+with+${encodeURIComponent(
-              formData.name
-            )}&location=Video+Call`,
-            "_blank"
-          );
+          setIsOpeningInvitation(true);
+          // Simulate opening invitation
+          setTimeout(() => {
+            alert(`Invitation sent to ${formData.email}`);
+            window.open(
+              `https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20240410T090000Z/20240410T093000Z&text=Business+Audit&details=Meeting+with+${encodeURIComponent(
+                formData.name
+              )}&location=Video+Call`,
+              "_blank"
+            );
+            setIsOpeningInvitation(false);
+          }, 800);
         }}
       >
-        Open Invitation 💬
+        {isOpeningInvitation ? "Opening..." : "Open Invitation 💬"}
       </Button>
       <div className="booking-summary">
         <h3 className="text-lg font-semibold">Business Audit</h3>
@@ -732,7 +741,8 @@ const BookingCalendar: React.FC = () => {
       alert("Please fill in all required fields");
       return;
     }
-
+    // Set loading state
+    setIsSubmitting(true);
     // Submit the form data along with the selected date/time
     const bookingData = {
       ...formData,
@@ -745,8 +755,9 @@ const BookingCalendar: React.FC = () => {
     // Here you would typically make an API call to submit the booking
     // Simulate email sending
     setTimeout(() => {
+      setIsSubmitting(false); // Turn off loading when done
       setCurrentStep("confirmation");
-    }, 1000);
+    }, 2000);
   };
 
   const ScrollingText: React.FC = () => {
@@ -949,7 +960,7 @@ const BookingCalendar: React.FC = () => {
                       option?: { children?: string }
                     ) => {
                       if (!option?.children) return false;
-                      return option.children
+                      return option?.children
                         .toLowerCase()
                         .includes(input.toLowerCase());
                     }}

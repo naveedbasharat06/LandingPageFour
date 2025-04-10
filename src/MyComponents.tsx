@@ -15,10 +15,10 @@ const ToolsWeLove = React.lazy(
 const MeetOurExpertTeam = React.lazy(
   () => import("./components/ourExpertTeam/OurTeam")
 );
-const BookingCalendar = React.lazy(
-  () => import("./components/bookingCalender/BookingCalender")
-);
-const Footer = React.lazy(() => import("./components/footer/Footer"));
+// const BookingCalendar = React.lazy(
+//   () => import("./components/bookingCalender/BookingCalender")
+// );
+// const Footer = React.lazy(() => import("./components/footer/Footer"));
 
 const MyComponent: React.FC = () => {
   return (
@@ -28,8 +28,8 @@ const MyComponent: React.FC = () => {
       <AutomationCanApplied />
       <ToolsWeLove />
       <MeetOurExpertTeam />
-      <BookingCalendar />
-      <Footer />
+      {/* <BookingCalendar />
+      <Footer /> */}
     </div>
   );
 };

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link, useLocation } from "react-router-dom";
+
 import Elixir_logo from "../../images/Layer-1.png";
 import Elixir_colored_logo from "../../images/Elixir-Automation-Logo.png";
 
@@ -8,14 +10,17 @@ const Navbar = () => {
     name: string;
     href: string;
   }
-
+  const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // eslint-disable-next-line
   const [activeLink, setActiveLink] = useState("Home");
-
+  const isServicePage = location.pathname === "/services";
+  const currentLogo = isServicePage ? Elixir_colored_logo : Elixir_logo;
+  const textColor = isServicePage ? "text-black" : "text-white";
   const navLinks: navLinksType[] = [
-    { name: "Home", href: "#" },
-    { name: "Service", href: "#" },
-    { name: "Testimonials", href: "#" },
+    { name: "Home", href: "/" },
+    { name: "Services", href: "/services" },
+    { name: "Testimonials", href: "/testimonials" },
   ];
 
   const mobileMenuVariants = {
@@ -41,13 +46,17 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="pt-4 md:pt-6 lg:pt-[15px] relative">
+    <nav
+      className={`pt-4 md:pt-6 lg:pt-[15px] relative ${
+        isServicePage ? "bg-white" : ""
+      }`}
+    >
       <div className="max-w-[1350px] mx-auto ">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <div className="flex-shrink-0 transition delay-150 duration-300 ease-in-out hover:-translate-y hover:scale-110 cursor-pointer">
             <img
-              src={Elixir_logo}
+              src={currentLogo}
               alt="uifry logo"
               className="h-auto w-[245px] md:w-[110px]"
             />
@@ -56,51 +65,67 @@ const Navbar = () => {
           {/* Desktop Menu */}
           <div className="destop_nav_links hidden md:flex md:justify-start gap-5 md:absolute md:ml-40 space-x-4 ">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
-                href={link.href}
+                to={link.href}
                 onClick={() => setActiveLink(link.name)}
                 className={`z-10 font-bold
                  py-0 px-5 text-[17px]  md:justify-start transition-colors hover:text-[#B34B98] ${
-                   activeLink === link.name
+                   location.pathname === link.href
                      ? "text-[#B34B98] font-bold"
-                     : "text-white"
+                     : textColor
                  }`}
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
           </div>
-
-          {/* hide our team Button */}
-          <motion.a
-            className="hidden md:flex bg-[#272364] text-[17px] font-bold text-white px-4 py-2 rounded-[100px] relative overflow-hidden lg:mr-11"
-            href="./"
-            initial={false}
-            whileHover={{
-              backgroundColor: "#B34B98",
-              transition: { duration: 0.5, ease: "easeInOut" },
-            }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <motion.span
-              initial={{ opacity: 1 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-              className="relative z-10 flex items-center"
+          <div className="flex gap-3">
+            {isServicePage && (
+              <div className="hidden md:flex gap-1">
+                <Link
+                  to="/login"
+                  className={`${textColor} text-[17px] font-bold px-4 py-2 rounded-[100px] hover:text-[#B34B98]`}
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/signup"
+                  className="bg-[#272364] text-[17px] font-bold text-white px-4 py-2 rounded-[100px] hover:bg-[#B34B98] transition-colors"
+                >
+                  Sign Up
+                </Link>
+              </div>
+            )}
+            {/* hide our team Button */}
+            <motion.a
+              className="hidden md:flex bg-[#272364] text-[17px] font-bold text-white px-4 py-2 rounded-[100px] relative overflow-hidden lg:mr-11"
+              href="./"
+              initial={false}
+              whileHover={{
+                backgroundColor: "#B34B98",
+                transition: { duration: 0.5, ease: "easeInOut" },
+              }}
+              whileTap={{ scale: 0.95 }}
             >
-              Hide Our Team ➝
-            </motion.span>
+              <motion.span
+                initial={{ opacity: 1 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+                className="relative z-10 flex items-center"
+              >
+                Hide Our Team ➝
+              </motion.span>
 
-            {/* Background overlay for smooth transition */}
-            <motion.div
-              initial={{ backgroundColor: "#B34B98", opacity: 0 }}
-              whileHover={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              className="absolute inset-0 z-0"
-            />
-          </motion.a>
-
+              {/* Background overlay for smooth transition */}
+              <motion.div
+                initial={{ backgroundColor: "#B34B98", opacity: 0 }}
+                whileHover={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="absolute inset-0 z-0"
+              />
+            </motion.a>
+          </div>
           {/* Mobile Menu Button */}
           <div className="md:hidden z-50">
             <button
@@ -114,7 +139,9 @@ const Navbar = () => {
               {/* Hamburger Icon */}
               {!isMenuOpen ? (
                 <svg
-                  className="h-6 w-6 text-white"
+                  className={`h-6 w-6 ${
+                    isServicePage ? "text-gray-600" : "text-white"
+                  }`}
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -195,21 +222,22 @@ const Navbar = () => {
                   className=" relative h-auto w-[123px] pb-4"
                 />
                 {navLinks.map((link) => (
-                  <a
+                  <Link
                     key={link.name}
-                    href={link.href}
+                    to={link.href}
                     onClick={() => {
                       setActiveLink(link.name);
+
                       setIsMenuOpen(false);
                     }}
                     className={`block px-[15px] py-[10px] text-lg font-bold rounded-md transition-colors ${
-                      activeLink === link.name
+                      location.pathname === link.href
                         ? "text-[#B34B98]"
                         : "text-black hover:bg-gray-100"
                     }`}
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 ))}
 
                 {/* Mobile  Button */}
