@@ -48,7 +48,7 @@ const Navbar = () => {
   return (
     <nav
       className={`pt-4 md:pt-6 lg:pt-[15px] relative ${
-        isServicePage ? "bg-white" : ""
+        isServicePage ? "bg-white py-2" : ""
       }`}
     >
       <div className="max-w-[1350px] mx-auto ">

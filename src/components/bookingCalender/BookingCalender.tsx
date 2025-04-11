@@ -874,7 +874,7 @@ const BookingCalendar: React.FC = () => {
                 </p>
               )}
               {currentStep === "form" && (
-                <p>
+                <p className="opacity-85">
                   <GlobalOutlined /> {timeZone} Time
                 </p>
               )}

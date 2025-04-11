@@ -8,6 +8,7 @@ import BookingCalendar from "./components/bookingCalender/BookingCalender";
 import Footer from "./components/footer/Footer";
 import Login from "./components/userAuth/Login";
 import SignUp from "./components/userAuth/SignUp";
+import LoadingSpinner from "./components/loadingSpinner/LoadingSpinner";
 // import Testimonials from "./testimonials";
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
       <Router>
         <div className="App overflow-scroll">
           {/* <MyComponent /> */}
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<LoadingSpinner />}>
             <Routes>
               <Route path="/" element={<MyComponent />} />
               <Route path="/services" element={<Services />} />
@@ -29,6 +30,7 @@ function App() {
       </Router>
       <BookingCalendar />
       <Footer />
+      {/* <LoadingSpinner /> */}
     </>
   );
 }

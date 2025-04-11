@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "./components/navbar/Navbar";
+import ServiceHeroSection from "./components/ServicesPage/serviceHeroSection";
 // const BookingCalendar = React.lazy(
 //   () => import("./components/bookingCalender/BookingCalender")
 // );
@@ -8,6 +9,7 @@ const Services = () => {
   return (
     <div className="">
       <Navbar />
+      <ServiceHeroSection />
       {/* <BookingCalendar />
       <Footer /> */}
     </div>

@@ -143,7 +143,7 @@ const AutomationCanApplied: React.FC = () => {
                     ? "0 10px 25px -5px rgba(179, 75, 152, 0.3)"
                     : "none",
               }}
-              className="relative bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 transition-all duration-300 flex flex-col items-center text-center border-b-[6px] border-[#C5BAF8] z-20 hover:z-30 group overflow-hidden"
+              className="relative bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 transition-all duration-75 flex flex-col items-center text-center border-b-[6px] border-[#C5BAF8] z-20 hover:z-30 group overflow-hidden cursor-pointer"
             >
               {/* Gradient overlay - hidden on mobile */}
               <motion.div

@@ -42,6 +42,7 @@
 .selected-time {
   font-weight: 600;
   color: #272364;
+  opacity: 80%;
 }
 
 .form-footer {
