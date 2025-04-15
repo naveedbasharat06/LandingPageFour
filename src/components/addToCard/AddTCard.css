@@ -1,0 +1,228 @@
+.addToCart_main {
+  position: relative;
+}
+.addToCart_background_overlay {
+  background-image: url("https://elixirautomation.com/wp-content/uploads/2025/01/Vector-Smart-Object.png");
+  --background-overlay: "";
+  background-position: 0px 102%;
+  background-repeat: no-repeat;
+  background-size: 22% auto;
+  transition: background var(--overlay-transition, 0.3s),
+    border-radius var(--border-transition, 0.3s),
+    opacity var(--overlay-transition, 0.3s);
+}
+.addTocart_image {
+  max-width: 565px;
+  /* height: 383px; */
+}
+.addTocart_image #addtocardImg {
+  max-width: 565px;
+  height: 383px;
+  border-radius: 25px;
+}
+.addToCart_content {
+  display: flex;
+  max-width: 1350px;
+  justify-content: center;
+  padding: 100px 5px;
+  align-items: center;
+  gap: 30px;
+  margin: auto;
+}
+.addToCart_payment {
+  max-width: 565px;
+}
+.addToCart_payment h1 {
+  font-family: "Figtree", Sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  text-transform: capitalize;
+  line-height: 1.2em;
+  color: #272364;
+  padding-bottom: 20px;
+  /* border-bottom: 1px solid gray; */
+  /* margin-bottom: 10px; */
+}
+.addToCart_payment h2 {
+  font-size: 40px;
+  color: #b34b98 !important;
+  font-family: Figtree !important;
+  font-weight: 600 !important;
+}
+.addToCart_payment h4 {
+  color: #141142;
+  font-family: "Figtree", Sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4em;
+  margin-bottom: 15px;
+}
+.addToCart_payment p {
+  color: #141142;
+  font-family: "Figtree", Sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4em;
+  margin-bottom: 15px;
+}
+#addtocart_btn {
+  font-family: "Figtree", Sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: capitalize;
+  letter-spacing: 0.3px;
+  border-style: none;
+  border-radius: 100px 100px 100px 100px;
+  padding: 20px;
+  color: #ffffff;
+  background-color: #b34b98;
+  transition: all 0.2s;
+}
+#addtocart_btn:hover {
+  background-color: #272364 !important;
+  color: white !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(20, 17, 66, 0.3);
+  transition: transform 0.5s ease;
+}
+
+#google_pay {
+  font-family: "Figtree", Sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: capitalize;
+  letter-spacing: 0.3px;
+  border-style: none;
+  border-radius: 8px;
+  padding: 8px;
+  color: white;
+  background-color: black;
+  transition: all 0.2s;
+}
+#google_pay:hover {
+  /* background-color: #272364 !important; */
+  opacity: 90%;
+  color: white !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(20, 17, 66, 0.3);
+  transition: transform 0.5s ease;
+  cursor: pointer;
+}
+@media (max-width: 1024px) {
+  .addTocart_image {
+    max-width: auto;
+    /* height: 383px; */
+  }
+  .addTocart_image #addtocardImg {
+    max-width: 470px;
+    height: auto;
+  }
+  .addToCart_content {
+    display: flex;
+    max-width: auto;
+    justify-content: center;
+    padding: 40px 10px;
+    align-items: center;
+    gap: 15px;
+    margin: auto;
+  }
+  .addToCart_payment {
+    max-width: auto;
+  }
+  .addToCart_payment h1 {
+    font-size: 28px;
+    padding-bottom: 20px;
+    /* border-bottom: 1px solid gray; */
+    /* margin-bottom: 10px; */
+  }
+  .addToCart_payment h2 {
+    font-size: 35px;
+    color: #b34b98 !important;
+    font-family: Figtree !important;
+    font-weight: 600 !important;
+  }
+  .addToCart_payment h4 {
+    font-size: 14px;
+
+    margin-bottom: 15px;
+  }
+  .addToCart_payment p {
+    color: #141142;
+    font-family: "Figtree", Sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4em;
+    margin-bottom: 15px;
+  }
+  #addtocart_btn {
+    font-size: 16px;
+    padding: 20px;
+    transition: all 0.2s;
+  }
+
+  #google_pay {
+    font-size: 18px;
+    font-weight: 700;
+
+    padding: 8px;
+
+    transition: all 0.2s;
+  }
+}
+@media (max-width: 768px) {
+  .addTocart_image {
+    max-width: auto;
+    width: 100%;
+    /* height: 383px; */
+  }
+  .addTocart_image #addtocardImg {
+    width: 100%;
+    height: 100%;
+  }
+  .addToCart_content {
+    display: grid;
+    max-width: auto;
+    flex-direction: column;
+    justify-content: center;
+    padding: 32px 10px;
+    align-items: center;
+    gap: 15px;
+    margin: auto;
+    width: 100%;
+  }
+  .addToCart_payment {
+    max-width: auto;
+    width: 100%;
+  }
+  .addToCart_payment h1 {
+    font-size: 21px;
+    padding-bottom: 20px;
+    /* border-bottom: 1px solid gray; */
+    /* margin-bottom: 10px; */
+  }
+  .addToCart_payment h2 {
+    font-size: 40px;
+    color: #b34b98 !important;
+    font-family: "Figtree" !important;
+    font-weight: 600 !important;
+  }
+  .addToCart_payment h4 {
+    font-size: 16px;
+
+    margin-bottom: 15px;
+  }
+  .addToCart_payment p {
+    font-size: 16px;
+
+    margin-bottom: 15px;
+  }
+  #addtocart_btn {
+    font-size: 16px;
+    padding: 20px;
+  }
+
+  #google_pay {
+    font-size: 18px;
+    padding: 8px;
+  }
+}

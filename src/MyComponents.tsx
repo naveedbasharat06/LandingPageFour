@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const HeroSection = React.lazy(
   () => import("./components/herosection/HeroSection")
@@ -21,6 +21,10 @@ const MeetOurExpertTeam = React.lazy(
 // const Footer = React.lazy(() => import("./components/footer/Footer"));
 
 const MyComponent: React.FC = () => {
+  useEffect(() => {
+    document.title =
+      " Elixir Automation – It’s simple: We start by automating your most time-consuming processes.";
+  }, []);
   return (
     <div className="">
       <HeroSection />

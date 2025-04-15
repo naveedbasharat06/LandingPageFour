@@ -50,13 +50,13 @@ const Navbar = () => {
   return (
     <nav
       className={`pt-4 md:pt-6 lg:pt-[15px] relative ${
-        isHomePage ? "bg-none" : "bg-white py-2"
+        isHomePage ? "bg-none" : "bg-white py-3"
       }`}
     >
-      <div className="max-w-[1350px] mx-auto ">
+      <div className="max-w-[1360px] mx-auto ">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <div className="flex-shrink-0 transition delay-150 duration-300 ease-in-out hover:-translate-y hover:scale-110 cursor-pointer">
+          <div className="flex-shrink-0 transition delay-150 duration-300 ease-in-out hover:-translate-y hover:scale-110 cursor-pointer z-50">
             <img
               src={currentLogo}
               alt="uifry logo"
@@ -82,18 +82,18 @@ const Navbar = () => {
               </Link>
             ))}
           </div>
-          <div className="flex gap-3 z-40">
+          <div className="flex gap-5 z-40">
             {!isHomePage && (
               <div className="hidden md:flex gap-1">
                 <Link
                   to="/login"
-                  className={`${textColor} text-[17px] font-bold px-4 py-2 rounded-[100px] hover:text-[#B34B98]`}
+                  className={`${textColor} text-[17px] font-bold px-6 py-2 rounded-[100px] hover:text-[#B34B98]`}
                 >
                   Login
                 </Link>
                 <Link
                   to="/signup"
-                  className="bg-[#272364] text-[17px] font-bold text-white px-4 py-2 rounded-[100px] hover:bg-[#B34B98] transition-colors"
+                  className="bg-[#272364] text-[17px] font-bold text-white px-6 py-2 rounded-[100px] hover:bg-[#B34B98] transition-colors"
                 >
                   Sign Up
                 </Link>

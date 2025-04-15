@@ -2,6 +2,7 @@
 import React from "react";
 import "./style.css";
 import Navbar from "../navbar/Navbar";
+import { motion } from "framer-motion";
 
 interface AuthLayoutProps {
   title: string;
@@ -28,7 +29,12 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
           alt=""
         />
         <div className="login_background_overlay"></div>
-        <div className="auth-card">
+        <motion.div
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, ease: "easeInOut" }}
+          className="auth-card"
+        >
           <div className="auth-header">
             <h1 className="auth-title">{title}</h1>
             <div className="auth-divider"></div>
@@ -38,7 +44,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
             {/* {footerText} */}
             <a href={footerLinkPath}>{footerLinkText}</a>
           </div>
-        </div>
+        </motion.div>
         {/* <img
         className="absolute bottom-0 left-0 max-w-[530px] hidden sm:block"
         src="https://elixirautomation.com/wp-content/uploads/2025/01/Vector-Smart-Object.png"

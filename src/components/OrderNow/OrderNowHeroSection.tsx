@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Divider, Button, Card } from "antd";
 import { ShoppingCartOutlined, ArrowRightOutlined } from "@ant-design/icons";
+import { motion } from "framer-motion";
 import Navbar from "../navbar/Navbar";
 // import { useParams } from "react-router-dom";
 // Add these imports at the top
@@ -60,10 +61,13 @@ interface PurchasePlan {
   benefits: Benefit[]; // Properly typed array of benefits
 }
 const OrderNowHeroSection = () => {
+  // const { title } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
   const plan = location.state?.plan as PurchasePlan;
-
+  useEffect(() => {
+    document.title = `${plan.title} - Elixir Automation`;
+  }, [plan.title]);
   if (!plan) {
     return (
       <div className="p-8 text-center">
@@ -72,12 +76,25 @@ const OrderNowHeroSection = () => {
       </div>
     );
   }
+  const goToAddToCard = (plan: PurchasePlan) => {
+    // Convert title to URL-friendly format
+    const urlFriendlyTitle = plan.title
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, "") // Remove special characters except dashes
+      .replace(/\s+/g, "-") // Replace spaces with dashes
+      .replace(/-+/g, "-"); // Remove consecutive dashes
 
+    navigate(`/addToCard/${urlFriendlyTitle}`, {
+      state: {
+        plan: plan,
+      },
+      replace: false, // Ensure this is false to allow navigation
+    });
+  };
   return (
     <div>
       <Navbar />
       <section className="OrderNow_Section">
-        {/* Background Video Container */}
         <div className="OrderNow_background_video_container">
           <video
             className="OrderNow-background-video-hosted"
@@ -89,16 +106,22 @@ const OrderNowHeroSection = () => {
           ></video>
           <div className="serviceHero-background-overlay"></div>
         </div>
+        {/* Background Video Container */}
         {/* <h1 className="bg-blue-400 p-3 rounded-3xl">Ordering: {decodedName}</h1> */}
         {/* Hero Content */}
-        <div className="hero_content_container">
+        <motion.div
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.9, ease: "easeInOut" }}
+          className="hero_content_container gap-3"
+        >
           <div className="widget-container lg:hidden block">
             <img
               decoding="async"
               width="10000"
               height="7000"
               src={plan.herosectionImg}
-              className="attachment-full size-full wp-image-2006 w-[100%]"
+              className="attachment-full  wp-image-2006 w-[90%]"
               alt="hero avatar"
             />{" "}
           </div>
@@ -133,17 +156,22 @@ const OrderNowHeroSection = () => {
               width="10000"
               height="7000"
               src={plan.herosectionImg}
-              className="attachment-full size-full wp-image-2006 w-[100%]"
+              className="attachment-full size-full wp-image-2006 w-[80%]"
               alt={`hero avatar :${plan.id} `}
             />{" "}
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* benifits cards  */}
-      <div className="our_benifits">
+      <div className="our_benifits transform lg:translate-y-[-30%]">
         <div className="benefit_background_overlay"></div>
-        <div className="py-6">
+        <motion.div
+          initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.9, ease: "easeInOut" }}
+          className="pt-3"
+        >
           <h2 className="benefits_title">Key Benefits</h2>
           <div className="max-w-[1350px] mx-auto px-4 py-10">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-3">
@@ -160,10 +188,10 @@ const OrderNowHeroSection = () => {
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
       {/* Pricing Package page  */}
-      <section className="pricing-package-container ">
+      <section className="pricing-package-container">
         <div className="pricing-header">
           <h1>Elixir Automation</h1>
           <h2>Pricing Package</h2>
@@ -172,7 +200,12 @@ const OrderNowHeroSection = () => {
           {" "}
           <h2>POPULAR</h2>{" "}
         </div>
-        <div className="pricing-tiers mx-auto max-w-[1350px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-8">
+        <motion.div
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.9, ease: "easeInOut" }}
+          className="pricing-tiers mx-auto max-w-[1350px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 px-3"
+        >
           {tiers.map((tier) => (
             <Card key={tier.id} className={`pricing-tier-card`}>
               <div className="pricing_package_bg_overlay"></div>
@@ -198,13 +231,14 @@ const OrderNowHeroSection = () => {
                   type="primary"
                   icon={<ShoppingCartOutlined />}
                   className="order-button"
+                  onClick={() => goToAddToCard(plan)} // Pass the current plan
                 >
                   {tier.buttonText}
                 </Button>
               </div>
             </Card>
           ))}
-        </div>
+        </motion.div>
       </section>
     </div>
   );

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./serviceHeroSection.css";
 import { Divider, Button, Card } from "antd";
 import { ShoppingCartOutlined, ArrowRightOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 interface Benefit {
   Id: number;
   title: string;
@@ -364,14 +365,24 @@ const PurchasePlanData: PurchasePlan[] = [
 ];
 
 const ServiceHeroSection = () => {
+  useEffect(() => {
+    document.title = "Services - Elixir Automation .";
+  }, []);
   const navigate = useNavigate();
 
   const goToOrderNow = (plan: PurchasePlan) => {
-    // This passes the entire plan object to the OrderNow page
-    navigate("/orderNow", {
+    // Convert title to URL-friendly format
+    const urlFriendlyTitle = plan.title
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, "") // Remove special characters except dashes
+      .replace(/\s+/g, "-") // Replace spaces with dashes
+      .replace(/-+/g, "-"); // Remove consecutive dashes
+
+    navigate(`/orderNow/${urlFriendlyTitle}`, {
       state: {
         plan: plan,
       },
+      replace: false, // Ensure this is false to allow navigation
     });
   };
 
@@ -395,7 +406,12 @@ const ServiceHeroSection = () => {
         </div>
 
         {/* Hero Content */}
-        <div className="hero_content_container">
+        <motion.div
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 2, ease: "easeInOut" }}
+          className="hero_content_container"
+        >
           <div className="widget-container lg:hidden block">
             <img
               decoding="async"
@@ -408,7 +424,7 @@ const ServiceHeroSection = () => {
           </div>
           <div className="hero_text_content">
             <h2 className="hero_subtitle">Automation Service Offerings</h2>
-            <h1 className="hero_title">
+            <h1 className="service_hero_title">
               TAKE YOUR <br /> BUSINESS <br /> TO NEXT LEVEL
             </h1>
             <div className="divider">
@@ -440,17 +456,22 @@ const ServiceHeroSection = () => {
               alt="hero avatar"
             />{" "}
           </div>
-        </div>
+        </motion.div>
       </section>
       {/* Overlay Cards (positioned 15% over the video) */}
       <div className="max-w-[1350px] mx-auto px-4 py-10 transform md:translate-y-[-3%] lg:translate-y-[-6%] ">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-8">
+        <motion.div
+          initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 2, ease: "easeInOut" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-8 relative"
+        >
           {PurchasePlanData.map((plan) => (
             <>
               <Card
                 key={plan.id}
                 hoverable
-                className="purchase-plan-card"
+                className="purchase-plan-card flex flex-col h-full"
                 cover={
                   <img
                     alt={plan.title}
@@ -485,7 +506,7 @@ const ServiceHeroSection = () => {
                     <Button
                       type="link"
                       className="view-more-button"
-                      // onClick={(name) => gotToOrderNow(name)}
+                      onClick={() => goToOrderNow(plan)}
                     >
                       {plan.viewMore}{" "}
                       <ArrowRightOutlined className="button-icon" />
@@ -503,7 +524,7 @@ const ServiceHeroSection = () => {
               </Card>
             </>
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   );

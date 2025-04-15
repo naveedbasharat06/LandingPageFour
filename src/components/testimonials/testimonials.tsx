@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Card, Avatar, Rate } from "antd";
 import { MutedOutlined } from "@ant-design/icons";
@@ -17,6 +17,9 @@ interface Testimonial {
 }
 
 const TestimonialsPage: React.FC = () => {
+  useEffect(() => {
+    document.title = "Testimonial - Elixir Automation";
+  }, []);
   // Testimonial data
   const testimonials: Testimonial[] = [
     {

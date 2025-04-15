@@ -12,12 +12,15 @@ import LoadingSpinner from "./components/loadingSpinner/LoadingSpinner";
 import Testimonials from "./components/testimonials/testimonials";
 // import Navbar from "./components/navbar/Navbar";
 import OrderNowHeroSection from "./components/OrderNow/OrderNowHeroSection";
-
+import AddToCard from "./components/addToCard/AddToCard";
+import ScrollToTop from "./hooks/ScrollToTop";
+import BackToTop from "./hooks/BackToTop";
 function App() {
   return (
     <>
       <div className="App overflow-scroll">
         <Router>
+          <ScrollToTop />
           {/* <Navbar /> */}
           {/* <MyComponent /> */}
           <Suspense fallback={<LoadingSpinner />}>
@@ -27,13 +30,18 @@ function App() {
               <Route path="/testimonials" element={<Testimonials />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
-              <Route path="/orderNow" element={<OrderNowHeroSection />} />
+              <Route
+                path="/orderNow/:title"
+                element={<OrderNowHeroSection />}
+              />
+              <Route path="/addToCard/:title" element={<AddToCard />} />
             </Routes>
             {/* < /> */}
           </Suspense>
         </Router>
         <BookingCalendar />
         <Footer />
+        <BackToTop />
       </div>
       {/* <LoadingSpinner /> */}
     </>
