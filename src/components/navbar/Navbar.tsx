@@ -14,9 +14,11 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   // eslint-disable-next-line
   const [activeLink, setActiveLink] = useState("Home");
-  const isServicePage = location.pathname === "/services";
-  const currentLogo = isServicePage ? Elixir_colored_logo : Elixir_logo;
-  const textColor = isServicePage ? "text-black" : "text-white";
+  // const isServicePage = location.pathname === "/services";
+  const isHomePage = location.pathname === "/";
+
+  const currentLogo = isHomePage ? Elixir_logo : Elixir_colored_logo;
+  const textColor = isHomePage ? "text-white" : "text-black";
   const navLinks: navLinksType[] = [
     { name: "Home", href: "/" },
     { name: "Services", href: "/services" },
@@ -48,7 +50,7 @@ const Navbar = () => {
   return (
     <nav
       className={`pt-4 md:pt-6 lg:pt-[15px] relative ${
-        isServicePage ? "bg-white py-2" : ""
+        isHomePage ? "bg-none" : "bg-white py-2"
       }`}
     >
       <div className="max-w-[1350px] mx-auto ">
@@ -80,8 +82,8 @@ const Navbar = () => {
               </Link>
             ))}
           </div>
-          <div className="flex gap-3">
-            {isServicePage && (
+          <div className="flex gap-3 z-40">
+            {!isHomePage && (
               <div className="hidden md:flex gap-1">
                 <Link
                   to="/login"
@@ -140,7 +142,7 @@ const Navbar = () => {
               {!isMenuOpen ? (
                 <svg
                   className={`h-6 w-6 ${
-                    isServicePage ? "text-gray-600" : "text-white"
+                    isHomePage ? "text-white" : "text-gray-600"
                   }`}
                   viewBox="0 0 24 24"
                   fill="none"

@@ -9,30 +9,34 @@ import Footer from "./components/footer/Footer";
 import Login from "./components/userAuth/Login";
 import SignUp from "./components/userAuth/SignUp";
 import LoadingSpinner from "./components/loadingSpinner/LoadingSpinner";
-// import Testimonials from "./testimonials";
+import Testimonials from "./components/testimonials/testimonials";
+// import Navbar from "./components/navbar/Navbar";
+import OrderNowHeroSection from "./components/OrderNow/OrderNowHeroSection";
 
 function App() {
   return (
     <>
-      <Router>
-        <div className="App overflow-scroll">
+      <div className="App overflow-scroll">
+        <Router>
+          {/* <Navbar /> */}
           {/* <MyComponent /> */}
           <Suspense fallback={<LoadingSpinner />}>
             <Routes>
               <Route path="/" element={<MyComponent />} />
               <Route path="/services" element={<Services />} />
-              {/* <Route path="/testimonials" element={<Testimonials />} /> */}
+              <Route path="/testimonials" element={<Testimonials />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
+              <Route path="/orderNow" element={<OrderNowHeroSection />} />
             </Routes>
+            {/* < /> */}
           </Suspense>
-        </div>
-      </Router>
-      <BookingCalendar />
-      <Footer />
+        </Router>
+        <BookingCalendar />
+        <Footer />
+      </div>
       {/* <LoadingSpinner /> */}
     </>
   );
 }
-
 export default App;

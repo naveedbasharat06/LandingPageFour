@@ -1,0 +1,367 @@
+/* order now herosecion style */
+.OrderNow_Section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.OrderNow_background_video_container {
+  position: absolute;
+  /* max-width: 1350px; */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.OrderNow-background-video-hosted {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+/* order now hero section content  */
+.hero_title {
+  font-size: 35px;
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 50px;
+  letter-spacing: 0px;
+  color: #ffffff;
+  margin-bottom: 2rem;
+}
+.hero_cta_button_Hide_team {
+  background-color: transparent;
+  font-family: "Figtree", Sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  border-radius: 41px;
+  padding: 11px 30px;
+  cursor: pointer;
+  position: relative;
+  right: 0;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  z-index: 1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.hero_cta_button_Hide_team::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  z-index: -1;
+  border-radius: 41px 41px 3px 3px;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.hero_cta_button_Hide_team:hover {
+  color: #141142;
+  /* border-color: white; */
+  box-shadow: 0 8px 15px rgba(179, 75, 152, 0.3);
+  transform: translateY(-3px);
+}
+
+.hero_cta_button_Hide_team:hover::before {
+  transform: translateY(0);
+}
+
+.hero_cta_button_Hide_team:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(179, 75, 152, 0.4);
+  transition: all 0.1s ease;
+}
+
+.hero_cta_button_Hide_team:hover {
+  background-color: #ffffff;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+/* ************benifits style  **********/
+.our_benifits {
+  background-image: url("https://elixirautomation.com/wp-content/uploads/2025/01/Tech-Overlay-Tilt-01-1.svg");
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
+}
+.benefit_background_overlay {
+  opacity: 0.5;
+  inset: 0;
+  position: absolute;
+}
+.benefits_title {
+  font-family: "Figtree", Sans-serif;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.2em;
+  color: #272364;
+  text-align: center;
+}
+.benefits-card {
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0;
+  border-style: solid;
+  border-width: 10px 0px 0px 0px;
+  /* border-color: #c5baf8; */
+  border: none;
+  border-bottom: 6px solid #c5baf8;
+  padding: 45px;
+  box-shadow: 0px 1px 15px 0px
+    rgba(168.27085162618883, 182.44723441745913, 210.79999999999998, 0.55);
+}
+.benefits-card:hover {
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
+  border: none;
+  border-bottom: 6px solid #c5baf8;
+  /* border-style: solid; */
+  /* border-width: 10px 0px 0px 0px; */
+
+  padding: 45px;
+  box-shadow: 0px 1px 15px 0px
+    rgba(168.27085162618883, 182.44723441745913, 210.79999999999998, 0.55);
+}
+
+.benefits-card .ant-card-body {
+  padding: 0;
+}
+.benefits_card_title {
+  color: #272364;
+  font-family: "Figtree", Sans-serif;
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 1.2em;
+  margin: 10px 0px;
+}
+.benefits_card_description {
+  color: #000000;
+  font-family: "Figtree", Sans-serif;
+  font-size: 16px;
+  line-height: 1.3em;
+}
+/* pricing packages style */
+.pricing-package-container {
+  margin: 0 auto;
+  background: url("https://elixirautomation.com/wp-content/uploads/2025/01/Tech-Overlay-01-1.svg");
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  /* padding: 2rem; */
+  margin-top: 0px;
+  margin-bottom: 0px;
+  transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
+  padding: 90px 0px 100px;
+  font-family: "Figtree", Sans-serif;
+}
+.pricing_package_bg_overlay {
+  background-image: url("https://elixirautomation.com/wp-content/uploads/2025/01/Vector-Smart-Objectcv-1.png");
+  background-position: bottom left;
+  background-repeat: no-repeat;
+  background-size: 48% auto;
+  opacity: 0.24;
+  inset: 0;
+  position: absolute;
+  box-sizing: border-box;
+  transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
+}
+.pricing-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.pricing_popular_text {
+  background-color: rgb(179, 75, 152);
+  box-shadow: rgba(0, 9, 85, 0.38) 0px 5px 10px 0px;
+  margin: auto;
+  padding: 10px;
+  width: 118px;
+  text-align: center;
+  border-radius: 6px;
+  align-items: center;
+  z-index: 10;
+}
+.pricing_popular_text h2 {
+  font-family: "Figtree", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: rgb(255, 255, 255);
+}
+
+.pricing-header h1 {
+  font-family: "Figtree", sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: rgb(179, 75, 152);
+}
+
+.pricing-header h2 {
+  font-family: "Figtree", sans-serif;
+  font-size: 58px;
+  font-weight: 800;
+  color: rgb(39, 35, 100);
+}
+
+/* .pricing-tiers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+} */
+
+.pricing-tier-card {
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  max-width: 399px;
+  width: 100%;
+  max-height: 480px;
+  flex-direction: column;
+  height: 100%;
+  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0;
+  border-style: solid;
+  border-width: 10px 0px 0px 0px;
+  /* border-color: #c5baf8; */
+  border: none;
+  border-bottom: 8px solid #c5baf8;
+  padding: 12px;
+  box-shadow: 0px 1px 15px 0px
+    rgba(168.27085162618883, 182.44723441745913, 210.79999999999998, 0.55);
+}
+
+.pricing-tier-card:hover {
+  transform: translateY(-5px);
+}
+
+.popular-tier {
+  border: 2px solid #b34b98;
+}
+
+.tier-header {
+  /* text-align: center; */
+  margin-bottom: 1.5rem;
+}
+
+.tier-header h3 {
+  font-family: "Figtree", sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: rgb(39, 35, 100);
+}
+
+.tier-header h4 {
+  font-family: Figtree, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 23px;
+  color: rgb(0, 0, 0);
+}
+
+.tier-divider {
+  margin: 1rem 0;
+  border-color: #b34b98b8;
+}
+
+.tier-features {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.tier-features li {
+  font-family: "Figtree", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  padding-left: 5px;
+}
+
+.feature-check {
+  display: inline-block;
+  width: 29px;
+  height: 24px;
+  /* background-color: #b34b98; */
+  /* border-color: #b34b98; */
+  border: 1.4px solid #b34b98;
+  color: #b34b98;
+  border-radius: 50%;
+  padding: 1px;
+  text-align: center;
+  line-height: 20px;
+
+  margin-right: 3px;
+  font-size: 1rem;
+}
+
+.tier-price {
+  /* text-align: center; */
+}
+
+.tier-price h2 {
+  font-family: "Figtree", sans-serif;
+  font-size: 40px;
+  font-weight: 800;
+  color: rgb(39, 35, 100);
+  margin: 30px 0px;
+}
+
+.order-button {
+  background-color: rgb(179, 75, 152);
+  font-family: "Figtree", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  border-style: solid;
+  border-width: 0px;
+  border-color: rgb(39, 35, 100);
+  border-radius: 41px;
+  padding: 23px 24px;
+  width: 95%;
+}
+.order-button:hover {
+  background-color: #272364 !important;
+  color: white !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(179, 75, 152, 0.3);
+  /* transform: translateX(3px); */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .pricing-tiers {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pricing-tier-card {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .pricing-header h1 {
+    font-size: 2rem;
+  }
+
+  .pricing-header h2 {
+    font-size: 1.5rem;
+  }
+}

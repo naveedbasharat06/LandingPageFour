@@ -1,0 +1,21 @@
+/* Custom styles that Tailwind might not handle easily */
+.ant-rate-star:not(:last-child) {
+  margin-right: 4px;
+}
+
+/* Custom animation for the quote icon */
+.anticon-quote {
+  transition: transform 0.3s ease;
+}
+
+.ant-card:hover .anticon-quote {
+  transform: scale(1.1);
+  color: #6366f1; /* indigo-500 */
+}
+
+/* Ensure cards have equal height in a row */
+.ant-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}

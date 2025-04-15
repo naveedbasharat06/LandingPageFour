@@ -2,6 +2,12 @@ import React from "react";
 import "./serviceHeroSection.css";
 import { Divider, Button, Card } from "antd";
 import { ShoppingCartOutlined, ArrowRightOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
+interface Benefit {
+  Id: number;
+  title: string;
+  description: string;
+}
 interface PurchasePlan {
   id: number;
   cardImg: string;
@@ -11,6 +17,9 @@ interface PurchasePlan {
   description: string;
   viewMore: string;
   OrderNow: string;
+  // order nowdata data
+  herosectionImg: string;
+  benefits: Benefit[]; // Properly typed array of benefits
 }
 const PurchasePlanData: PurchasePlan[] = [
   {
@@ -25,6 +34,33 @@ const PurchasePlanData: PurchasePlan[] = [
       "A next-level AI chatbot that taps into your existing knowledge base (like Google Drive, Notion, or any data source) to provide accurate, context-specific responses in real time. It can be deployed across channels—Telegram, WhatsApp, SMS, or your website—ensuring your users get the right info exactly when they need it",
     viewMore: "View More",
     OrderNow: "Order Now",
+    herosectionImg:
+      "https://elixirautomation.com/wp-content/uploads/2025/03/robot-chat-1.png",
+    // order now data
+    // herosectionImg : ''
+    benefits: [
+      {
+        Id: 1,
+        title: "Contextual Accuracy",
+        description: "Retrieves relevant data from your knowledge base",
+      },
+      {
+        Id: 2,
+        title: "Real-Time Updates",
+        description: "Always references the most current info",
+      },
+      {
+        Id: 3,
+        title: "Multi-Channel Support",
+        description: "Works across Telegram, WhatsApp, SMS and more",
+      },
+      {
+        Id: 4,
+        title: "Scalable Support:",
+        description:
+          "Handles massive volumes of queries without sacrificing quality.",
+      },
+    ],
   },
   {
     id: 2,
@@ -38,6 +74,26 @@ const PurchasePlanData: PurchasePlan[] = [
       "Automates the entire LinkedIn prospecting cycle—from scanning profiles and sending connection requests to messaging leads. Designed to find your ideal prospects faster and kickstart meaningful conversations without the manual grind.",
     viewMore: "View More",
     OrderNow: "Order Now",
+    // order now data
+    herosectionImg:
+      "https://elixirautomation.com/wp-content/uploads/2025/03/linkedin.png",
+    benefits: [
+      {
+        Id: 1,
+        title: "Time Saver",
+        description: "Frees your team from repetitive LinkedIn tasks.",
+      },
+      {
+        Id: 2,
+        title: "Better Targeting",
+        description: "Zero in on your ideal customer profile.",
+      },
+      {
+        Id: 3,
+        title: "Scalability",
+        description: "Ramp up or scale down based on campaign goals.",
+      },
+    ],
   },
   {
     id: 3,
@@ -51,6 +107,26 @@ const PurchasePlanData: PurchasePlan[] = [
       "An automated outreach solution that handles connection requests, follow-up messages, and scheduling—your behind-the-scenes sales rep working 24/7 on LinkedIn.",
     viewMore: "View More",
     OrderNow: "Order Now",
+    // order now data
+    herosectionImg:
+      "https://elixirautomation.com/wp-content/uploads/2025/03/linkedin.png",
+    benefits: [
+      {
+        Id: 1,
+        title: "Consistent Pipeline",
+        description: "Ensures constant engagement with new leads",
+      },
+      {
+        Id: 2,
+        title: "Personal Touch",
+        description: "Customizable messaging avoids spammy vibes.",
+      },
+      {
+        Id: 3,
+        title: "Increased Conversions",
+        description: "Timely follow-ups drive higher response rates.",
+      },
+    ],
   },
   {
     id: 4,
@@ -64,6 +140,27 @@ const PurchasePlanData: PurchasePlan[] = [
       "A streamlined invoice generation and distribution system that captures data, creates professional invoices, and notifies clients automatically.",
     viewMore: "View More",
     OrderNow: "Order Now",
+    // order now data
+    herosectionImg:
+      "https://elixirautomation.com/wp-content/uploads/2025/03/invoice.png",
+    benefits: [
+      {
+        Id: 1,
+        title: "Error Reduction",
+        description: "Eliminate manual invoice mistakes.",
+      },
+      {
+        Id: 2,
+        title: "Faster Payments",
+        description: "Automated reminders speed up cash flow.",
+      },
+      {
+        Id: 3,
+        title: "Scalability",
+        description:
+          "Perfect for startups or large enterprises with global invoicing.",
+      },
+    ],
   },
   {
     id: 5,
@@ -77,6 +174,26 @@ const PurchasePlanData: PurchasePlan[] = [
       "Captures credit-seeking leads, runs basic qualification, and routes them into a sales pipeline for easy follow-up.",
     viewMore: "View More",
     OrderNow: "Order Now",
+    // order now data
+    herosectionImg:
+      "https://elixirautomation.com/wp-content/uploads/2025/03/attraction-icon.png",
+    benefits: [
+      {
+        Id: 1,
+        title: "Targeted Leads",
+        description: "Focus on prospects who actually need credit products.",
+      },
+      {
+        Id: 2,
+        title: "Automatic Qualification",
+        description: "Pre-checks creditworthiness to save time.",
+      },
+      {
+        Id: 3,
+        title: "Better Conversion",
+        description: "Sends hot leads directly to your sales team.",
+      },
+    ],
   },
   {
     id: 6,
@@ -90,6 +207,26 @@ const PurchasePlanData: PurchasePlan[] = [
       "An intelligent voice-based system that handles inbound calls, answers FAQs, and routes calls to the right department if needed.",
     viewMore: "View More",
     OrderNow: "Order Now",
+    // order now data
+    herosectionImg:
+      "https://elixirautomation.com/wp-content/uploads/2025/03/ai-assistant.png",
+    benefits: [
+      {
+        Id: 1,
+        title: "Round-the-Clock Support",
+        description: "Customers get answers anytime.",
+      },
+      {
+        Id: 2,
+        title: "Reduced Workload",
+        description: "Frees up human agents for complex tasks.",
+      },
+      {
+        Id: 3,
+        title: "Multilingual Options:",
+        description: "Expand globally without language barriers.",
+      },
+    ],
   },
   {
     id: 7,
@@ -103,6 +240,26 @@ const PurchasePlanData: PurchasePlan[] = [
       "A fully automated inventory tracking system built on Airtable, complete with triggers for restock alerts and real-time reporting.",
     viewMore: "View More",
     OrderNow: "Order Now",
+    // order now data
+    herosectionImg:
+      "https://elixirautomation.com/wp-content/uploads/2025/03/inventory-management-1.png",
+    benefits: [
+      {
+        Id: 1,
+        title: "User-Friendly",
+        description: "Airtable’s intuitive interface makes it a breeze.",
+      },
+      {
+        Id: 2,
+        title: "Accurate Stock Counts",
+        description: "Avoid overselling or stockouts.",
+      },
+      {
+        Id: 3,
+        title: "Cross-Platform",
+        description: "Sync with e-commerce sites or POS systems seamlessly.",
+      },
+    ],
   },
   {
     id: 8,
@@ -116,6 +273,27 @@ const PurchasePlanData: PurchasePlan[] = [
       "A chatbot/autoresponder system for external channels like your website, email, or social platforms. It handles FAQs, routes questions, and follows up automatically.",
     viewMore: "View More",
     OrderNow: "Order Now",
+
+    // order now data
+    herosectionImg:
+      "https://elixirautomation.com/wp-content/uploads/2025/03/chatbot-speech-bubble.png",
+    benefits: [
+      {
+        Id: 1,
+        title: "Always-On Support",
+        description: "Instant responses, day or night.",
+      },
+      {
+        Id: 2,
+        title: "Consistent Branding:",
+        description: "Centralized messaging ensures an on-brand experience.",
+      },
+      {
+        Id: 3,
+        title: "Cost-Effective",
+        description: "Reduce the need for large support teams.",
+      },
+    ],
   },
   {
     id: 9,
@@ -129,6 +307,26 @@ const PurchasePlanData: PurchasePlan[] = [
       "An end-to-end onboarding journey for new clients or employees, covering email sequences, data collection, and progress tracking.",
     viewMore: "View More",
     OrderNow: "Order Now",
+    // order now data
+    herosectionImg:
+      "https://elixirautomation.com/wp-content/uploads/2025/03/process.png",
+    benefits: [
+      {
+        Id: 1,
+        title: "Faster Adoption",
+        description: "Get new users up to speed quickly",
+      },
+      {
+        Id: 2,
+        title: "Personalized Experience",
+        description: "Tailor flows based on user role or preferences.",
+      },
+      {
+        Id: 3,
+        title: "Visibility",
+        description: "Real-time analytics on user progress.",
+      },
+    ],
   },
   {
     id: 10,
@@ -142,10 +340,44 @@ const PurchasePlanData: PurchasePlan[] = [
       "Our top-selling service automates content creation for any type of social media channel, newsletters, articles, blogs, or short-form video captions. Reduce the manual effort of brainstorming topics and scheduling content.",
     viewMore: "View More",
     OrderNow: "Order Now",
+    // order now data
+    herosectionImg:
+      "https://elixirautomation.com/wp-content/uploads/2025/03/content-management_3222472.png",
+    benefits: [
+      {
+        Id: 1,
+        title: "Creative Consistency",
+        description: "Never run out of content ideas.",
+      },
+      {
+        Id: 2,
+        title: "Time Efficiency",
+        description: "Automates posting so you can focus on strategy.",
+      },
+      {
+        Id: 3,
+        title: "Data-Driven Insights:",
+        description: "Track engagement and optimize future content.",
+      },
+    ],
   },
 ];
 
 const ServiceHeroSection = () => {
+  const navigate = useNavigate();
+
+  const goToOrderNow = (plan: PurchasePlan) => {
+    // This passes the entire plan object to the OrderNow page
+    navigate("/orderNow", {
+      state: {
+        plan: plan,
+      },
+    });
+  };
+
+  // const userInfo = (name:any) => {
+  //   navigate(`/userinfo/${name}`);
+  // };
   return (
     <div className="service_heroSection_main">
       <section className="service_Section">
@@ -250,11 +482,19 @@ const ServiceHeroSection = () => {
                   </p>
 
                   <div className="button-pair-container flex justify-between items-center pt-4 mt-auto">
-                    <Button type="link" className="view-more-button">
+                    <Button
+                      type="link"
+                      className="view-more-button"
+                      // onClick={(name) => gotToOrderNow(name)}
+                    >
                       {plan.viewMore}{" "}
                       <ArrowRightOutlined className="button-icon" />
                     </Button>
-                    <Button type="primary" className="order-now-button">
+                    <Button
+                      type="primary"
+                      className="order-now-button"
+                      onClick={() => goToOrderNow(plan)} // Pass the current plan
+                    >
                       {plan.OrderNow}{" "}
                       <ShoppingCartOutlined className="button-icon" />
                     </Button>

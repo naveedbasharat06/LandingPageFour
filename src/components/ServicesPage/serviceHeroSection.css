@@ -105,7 +105,7 @@
   color: #141142;
   border: 2px solid #141142;
   border-radius: 41px;
-  padding: 12px 30px;
+  padding: 11px 30px;
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -266,7 +266,7 @@
   padding: 0;
 }
 .purchase_card_overlay {
-  background-image: url(https://elixirautomation.com/wp-content/uploads/2025/01/Vector-Smart-Objectcv-1.png);
+  background-image: url("https://elixirautomation.com/wp-content/uploads/2025/01/Vector-Smart-Objectcv-1.png");
   background-position: bottom left;
   background-repeat: no-repeat;
   background-size: 48% auto;
