@@ -152,7 +152,7 @@ const OrderNowHeroSection = () => {
                   <span className="px-4 py-2 bg-[#B34B98]  text-white text-[25px] rounded-full">
                     ✓
                   </span>
-                  <h2 className="benefits_card_title">{item.title}</h2>
+                  <h2 className="benefits_card_title">{item.title}:</h2>
                   <h2 className="benefits_card_description">
                     {item.description}
                   </h2>
