@@ -1,10 +1,10 @@
+import { useEffect, useState } from "react";
 import "./AddTCard.css";
-import { Button } from "antd";
+import { Button, Alert } from "antd";
 import googlepaylogo from "../../images/google-pay.png";
 import Navbar from "../navbar/Navbar";
 import { motion } from "framer-motion";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 interface Benefit {
   Id: number;
   title: string;
@@ -25,6 +25,7 @@ interface PurchasePlan {
 }
 const AddToCard = () => {
   // const { title } = useParams();
+  const [showAlert, setShowAlert] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const plan = location.state?.plan as PurchasePlan;
@@ -39,6 +40,15 @@ const AddToCard = () => {
       </div>
     );
   }
+
+  const handleAddtoCard = () => {
+    setShowAlert(true);
+
+    // Hide the alert after 3 seconds
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 5000);
+  };
   return (
     <div className="addToCart_main">
       <Navbar />
@@ -47,6 +57,25 @@ const AddToCard = () => {
         src="https://elixirautomation.com/wp-content/uploads/2025/01/border-new-01-1.svg"
         alt=""
       />
+      {/* Alert Notification */}
+      {showAlert && (
+        <motion.div
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.9, ease: "easeInOut" }}
+          className="fixed top-20 right-4 z-50"
+        >
+          <Alert
+            message="Item Added to Cart"
+            description={`${plan.title} has been added to your shopping cart.`}
+            type="success"
+            showIcon
+            closable
+            onClose={() => setShowAlert(false)}
+          />
+        </motion.div>
+      )}
+
       <motion.div
         initial={{ opacity: 0, x: 100 }}
         animate={{ opacity: 1, x: 0 }}
@@ -72,7 +101,10 @@ const AddToCard = () => {
               integrations.
             </p>
             <div className="flex flex-col gap-0.5">
-              <Button id="addtocart_btn">Add To Cart</Button>
+              <Button id="addtocart_btn" onClick={handleAddtoCard}>
+                Add To Cart
+              </Button>
+
               <span id="google_pay">
                 <img
                   src={googlepaylogo}
