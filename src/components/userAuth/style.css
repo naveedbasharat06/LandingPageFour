@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 8% 5px;
 
   /* bottom: 0; */
 }
@@ -178,7 +178,12 @@
   font-size: 15px;
   transition: color 0.3s;
 }
-
+@media (max-width: 1024px) {
+  .loginSinUp_main {
+    min-height: 100vh;
+    padding: 7% 5px;
+  }
+}
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .auth-card {

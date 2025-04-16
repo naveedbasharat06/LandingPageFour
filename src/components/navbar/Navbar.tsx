@@ -241,7 +241,22 @@ const Navbar = () => {
                     {link.name}
                   </Link>
                 ))}
-
+                {!isHomePage && (
+                  <div className="flex flex-col gap-1">
+                    <Link
+                      to="/login"
+                      className={`text-white text-center bg-[#B34B98] text-[17px] font-bold px-6 py-2 rounded-[100px] hover:text-[#B34B98]`}
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      to="/signup"
+                      className="bg-[#272364] text-center text-[17px] font-bold text-white px-6 py-2 rounded-[100px] hover:bg-[#B34B98] transition-colors"
+                    >
+                      Sign Up
+                    </Link>
+                  </div>
+                )}
                 {/* Mobile  Button */}
                 {/* <a
                   className="bg-[#272364] text-white px-5 py-3 rounded-md font-medium w-full block text-center mt-4 transition-all duration-500 ease-in-out hover:bg-[#B34B98]"

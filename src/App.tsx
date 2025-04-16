@@ -15,6 +15,8 @@ import OrderNowHeroSection from "./components/OrderNow/OrderNowHeroSection";
 import AddToCard from "./components/addToCard/AddToCard";
 import ScrollToTop from "./hooks/ScrollToTop";
 import BackToTop from "./hooks/BackToTop";
+import NotFound from "./hooks/NoteFoundPage";
+
 function App() {
   return (
     <>
@@ -35,6 +37,7 @@ function App() {
                 element={<OrderNowHeroSection />}
               />
               <Route path="/addToCard/:title" element={<AddToCard />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
             {/* < /> */}
           </Suspense>

@@ -502,7 +502,7 @@ const ServiceHeroSection = () => {
                     {plan.description}
                   </p>
 
-                  <div className="button-pair-container flex justify-between items-center pt-4 mt-auto">
+                  <div className="button-pair-container flex justify-between items-center pt-4 mt-auto gap-1">
                     <Button
                       type="link"
                       className="view-more-button"

@@ -3,6 +3,7 @@ import React from "react";
 import "./style.css";
 import Navbar from "../navbar/Navbar";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 interface AuthLayoutProps {
   title: string;
@@ -42,7 +43,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
           {children}
           <div className="auth-footer">
             {/* {footerText} */}
-            <a href={footerLinkPath}>{footerLinkText}</a>
+            <Link to={footerLinkPath}>{footerLinkText}</Link>
           </div>
         </motion.div>
         {/* <img
